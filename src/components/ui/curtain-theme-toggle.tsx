@@ -65,7 +65,7 @@ const EASING = "cubic-bezier(0.76, 0, 0.24, 1)"
 export function ThemeToggle({
   variant = "default",
   appBarProps,
-  defaultTheme = "light",
+  defaultTheme = "dark",
   barHeight: explicitBarHeight,
   buttonSize = 36,
   duration = 550,
