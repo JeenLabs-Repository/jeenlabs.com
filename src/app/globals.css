@@ -219,6 +219,10 @@
     -webkit-text-stroke: 1px color-mix(in oklab, #dc2626 85%, white);
   }
 
+  .font-brand {
+    font-family: var(--font-brand), var(--font-sans), sans-serif;
+  }
+
   .hero-accent {
     color: #dc2626;
   }

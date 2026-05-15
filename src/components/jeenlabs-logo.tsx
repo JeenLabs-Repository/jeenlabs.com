@@ -1,12 +1,26 @@
+import Link from "next/link"
+
 import { cn } from "@/lib/utils"
 
-export function JeenlabsLogo({ className }: { className?: string }) {
+const ICON_SIZES = {
+  sm: "h-8 w-auto",
+  md: "h-9 w-auto sm:h-10",
+  lg: "h-12 w-auto md:h-14",
+} as const
+
+const WORDMARK_SIZES = {
+  sm: "text-xl tracking-[0.2em]",
+  md: "text-lg tracking-[0.36em] sm:text-xl sm:tracking-[0.4em]",
+  lg: "text-2xl tracking-[0.4em]",
+} as const
+
+export function LogoMark({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 340 413"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("block h-9 w-auto shrink-0 md:h-10", className)}
+      className={cn("block shrink-0", className)}
       aria-hidden
     >
       <g>
@@ -49,4 +63,63 @@ export function JeenlabsLogo({ className }: { className?: string }) {
       </g>
     </svg>
   )
+}
+
+export { LogoMark as JeenlabsLogo }
+
+export function LogoWordmark({
+  className,
+  size = "md",
+}: {
+  className?: string
+  size?: keyof typeof WORDMARK_SIZES
+}) {
+  return (
+    <div
+      className={cn(
+        "font-brand text-center font-semibold leading-none",
+        WORDMARK_SIZES[size],
+        className,
+      )}
+    >
+      <span className="text-foreground">JEENL</span>
+      <span className="text-[#dc2626]">A</span>
+      <span className="text-foreground">BS</span>
+    </div>
+  )
+}
+
+export function Logo({
+  size = "md",
+  showText = true,
+  className,
+  linkToHome = false,
+}: {
+  size?: keyof typeof ICON_SIZES
+  showText?: boolean
+  className?: string
+  linkToHome?: boolean
+}) {
+  const content = (
+    <div
+      className={cn(
+        "flex items-center justify-center",
+        showText ? "gap-2 sm:gap-2.5" : "",
+        className,
+      )}
+    >
+      <LogoMark className={cn("text-foreground", ICON_SIZES[size])} />
+      {showText && <LogoWordmark size={size} />}
+    </div>
+  )
+
+  if (linkToHome) {
+    return (
+      <Link href="/" className="inline-flex cursor-pointer no-underline">
+        {content}
+      </Link>
+    )
+  }
+
+  return content
 }

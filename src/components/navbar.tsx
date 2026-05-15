@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { gsap } from "gsap"
 
-import { JeenlabsLogo } from "@/components/jeenlabs-logo"
+import { LogoMark, LogoWordmark } from "@/components/jeenlabs-logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
 
@@ -108,10 +108,11 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="pointer-events-auto inline-flex shrink-0 text-black transition-colors dark:text-white"
+          className="pointer-events-auto inline-flex shrink-0 items-center gap-2 text-foreground transition-opacity hover:opacity-90 sm:gap-2.5"
           aria-label="jeenlabs home"
         >
-          <JeenlabsLogo />
+          <LogoMark className="h-9 w-auto md:h-10" />
+          <LogoWordmark size="sm" />
         </Link>
 
         <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 md:gap-3">
