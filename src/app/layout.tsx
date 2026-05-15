@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { ModeToggle } from "@/components/mode-toggle";
+import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
@@ -40,9 +40,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="fixed top-4 right-4 z-50">
-            <ModeToggle />
-          </div>
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>
