@@ -121,10 +121,27 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+}
+
+@layer utilities {
+  .safe-x {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }

@@ -6,6 +6,7 @@ import { gsap } from "gsap"
 
 import { JeenlabsLogo } from "@/components/jeenlabs-logo"
 import { ModeToggle } from "@/components/mode-toggle"
+import { cn } from "@/lib/utils"
 
 const BRAND_RED = "#dc2626"
 
@@ -94,37 +95,50 @@ export function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-[1001] flex items-center justify-between px-6 pt-8 md:px-10">
+      <header
+        className={cn(
+          "pointer-events-none fixed inset-x-0 top-0 z-[1001]",
+          "flex items-center justify-between",
+          "pt-[max(2rem,env(safe-area-inset-top,0px))]",
+          "pl-[max(1.5rem,env(safe-area-inset-left,0px))]",
+          "pr-[max(1.5rem,env(safe-area-inset-right,0px))]",
+          "md:pl-[max(2.5rem,env(safe-area-inset-left,0px))]",
+          "md:pr-[max(2.5rem,env(safe-area-inset-right,0px))]",
+        )}
+      >
         <Link
           href="/"
-          className="pointer-events-auto text-black transition-colors dark:text-white"
+          className="pointer-events-auto inline-flex shrink-0 text-black transition-colors dark:text-white"
           aria-label="jeenlabs home"
         >
           <JeenlabsLogo />
         </Link>
 
-        <div className="pointer-events-auto flex items-center gap-2 md:gap-3">
+        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 md:gap-3">
           <ModeToggle />
           <button
             type="button"
-            className="flex size-12 flex-col items-center justify-center gap-1.5 border-0 bg-transparent p-0 cursor-pointer md:size-14"
+            className={cn(
+              "flex size-11 flex-col items-center justify-center gap-1.5 border-0 bg-transparent p-0 cursor-pointer",
+              "touch-manipulation sm:size-12 md:size-14",
+            )}
             onClick={toggleMenu}
             aria-label={isOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={isOpen}
             aria-controls="site-nav-menu"
           >
             <span
-              className="block h-0.5 w-6 rounded-full transition-transform duration-300 ease-out"
+              className="block h-0.5 w-5 rounded-full transition-transform duration-300 ease-out sm:w-6"
               style={{
                 background: BRAND_RED,
-                transform: isOpen ? "translateY(5px) rotate(45deg)" : "none",
+                transform: isOpen ? "translateY(4.5px) rotate(45deg)" : "none",
               }}
             />
             <span
-              className="block h-0.5 w-6 rounded-full transition-transform duration-300 ease-out"
+              className="block h-0.5 w-5 rounded-full transition-transform duration-300 ease-out sm:w-6"
               style={{
                 background: BRAND_RED,
-                transform: isOpen ? "translateY(-5px) rotate(-45deg)" : "none",
+                transform: isOpen ? "translateY(-4.5px) rotate(-45deg)" : "none",
               }}
             />
           </button>
@@ -135,37 +149,47 @@ export function Navbar() {
         <div
           ref={overlayRef}
           id="site-nav-menu"
-          className="fixed inset-0 z-[1000] hidden flex-col bg-background/90 backdrop-blur-xl"
+          className="fixed inset-0 z-[1000] hidden flex-col bg-background/90 backdrop-blur-xl safe-x"
           aria-hidden={!isOpen}
         >
           <nav
             ref={panelRef}
-            className="flex flex-1 flex-col items-end justify-center px-6 pb-16 pt-28 md:px-16 md:pt-32"
+            className={cn(
+              "flex flex-1 flex-col items-end justify-center",
+              "px-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] pt-[calc(4.5rem+env(safe-area-inset-top,0px))]",
+              "sm:px-6 sm:pb-12 sm:pt-24",
+              "md:px-12 md:pb-16 md:pt-28",
+              "lg:px-16 lg:pt-32",
+            )}
             aria-label="Main menu"
           >
             <ul className="m-0 flex list-none flex-col items-end p-0 text-right">
               {NAV_ITEMS.map((item, index) => (
-                <li
-                  key={item.href}
-                  className="border-y border-border/50"
-                >
+                <li key={item.href} className="w-full border-y border-border/50">
                   <Link
                     href={item.href}
                     aria-label={item.ariaLabel}
-                    className="group flex flex-row-reverse items-baseline gap-4 py-5 no-underline md:py-7"
+                    className={cn(
+                      "group flex flex-row-reverse items-baseline gap-3 py-4 no-underline touch-manipulation",
+                      "sm:gap-4 sm:py-5 md:py-7",
+                    )}
                     onClick={closeMenu}
                     ref={(el) => {
                       if (el) linkRefs.current[index] = el
                     }}
                   >
                     <span
-                      className="min-w-8 font-mono text-xs tabular-nums opacity-40"
+                      className="min-w-7 font-mono text-[0.65rem] tabular-nums opacity-40 sm:min-w-8 sm:text-xs"
                       style={{ color: BRAND_RED }}
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className="text-3xl font-semibold tracking-tight lowercase transition-transform duration-300 ease-out group-hover:-translate-x-2 md:text-5xl lg:text-6xl"
+                      className={cn(
+                        "text-2xl font-semibold tracking-tight lowercase transition-transform duration-300 ease-out",
+                        "group-hover:-translate-x-1 group-active:-translate-x-2",
+                        "sm:text-3xl md:text-5xl lg:text-6xl",
+                      )}
                       style={{ color: BRAND_RED }}
                     >
                       {item.label}

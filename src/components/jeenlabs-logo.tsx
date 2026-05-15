@@ -6,7 +6,7 @@ export function JeenlabsLogo({ className }: { className?: string }) {
       viewBox="0 0 340 413"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-9 w-auto md:h-10", className)}
+      className={cn("block h-9 w-auto shrink-0 md:h-10", className)}
       aria-hidden
     >
       <g>

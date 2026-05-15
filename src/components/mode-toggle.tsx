@@ -17,7 +17,7 @@ export function ModeToggle() {
   }, [])
 
   if (!mounted) {
-    return <div className="size-9" aria-hidden="true" />
+    return <div className="size-11 shrink-0" aria-hidden="true" />
   }
 
   const defaultTheme: Theme =
@@ -27,6 +27,7 @@ export function ModeToggle() {
     <ThemeToggle
       variant="icon"
       defaultTheme={defaultTheme}
+      buttonSize={44}
       duration={600}
       onThemeChange={(theme) => setTheme(theme)}
     />
