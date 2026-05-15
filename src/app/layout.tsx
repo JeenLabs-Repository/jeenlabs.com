@@ -58,8 +58,10 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <div className="flex min-h-dvh w-full flex-1 flex-col">
+            <Navbar />
+            <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

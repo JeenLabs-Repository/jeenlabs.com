@@ -1,0 +1,37 @@
+@layer utilities {
+  .not-found-dot-grid {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 5%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 26px 26px;
+    mask-image: radial-gradient(
+      ellipse 85% 70% at 50% 45%,
+      black 15%,
+      transparent 72%
+    );
+  }
+
+  .dark .not-found-dot-grid {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 9%, transparent) 1px,
+      transparent 1px
+    );
+  }
+
+  .not-found-brand-glow {
+    background: radial-gradient(
+      ellipse 55% 40% at 50% 0%,
+      color-mix(in oklab, var(--brand) 18%, transparent) 0%,
+      transparent 65%
+    );
+  }
+
+  .dark .not-found-brand-glow {
+    background: radial-gradient(
+      ellipse 55% 40% at 50% 0%,
+      color-mix(in oklab, var(--brand) 22%, transparent) 0%,
+      transparent 62%
+    );
+  }
+}
