@@ -144,4 +144,140 @@
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+
+  .hero-content-vignette {
+    background: radial-gradient(
+      ellipse 100% 88% at 48% 44%,
+      rgba(255, 255, 255, 0.92) 0%,
+      transparent 68%
+    );
+  }
+
+  @media (width >= 48rem) {
+    .hero-content-vignette {
+      background: radial-gradient(
+        ellipse 105% 90% at 42% 42%,
+        rgba(255, 255, 255, 0.95) 0%,
+        transparent 72%
+      );
+    }
+  }
+
+  .dark .hero-content-vignette {
+    background: radial-gradient(
+      ellipse 100% 88% at 48% 44%,
+      rgba(0, 0, 0, 0.92) 0%,
+      transparent 68%
+    );
+  }
+
+  @media (width >= 48rem) {
+    .dark .hero-content-vignette {
+      background: radial-gradient(
+        ellipse 105% 90% at 42% 42%,
+        rgba(0, 0, 0, 1) 0%,
+        transparent 72%
+      );
+    }
+  }
+
+  .glass-panel {
+    border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+    background: color-mix(in oklab, var(--background) 55%, transparent);
+    backdrop-filter: blur(16px);
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .glass-panel:hover {
+    border-color: color-mix(in oklab, #dc2626 40%, var(--foreground) 10%);
+    box-shadow: 0 0 28px color-mix(in oklab, #dc2626 14%, transparent);
+  }
+
+  .dark .glass-panel {
+    background: color-mix(in oklab, var(--background) 45%, transparent);
+    border-color: color-mix(in oklab, #dc2626 18%, var(--foreground) 8%);
+  }
+
+  .dark .glass-panel:hover {
+    border-color: color-mix(in oklab, #dc2626 45%, transparent);
+    box-shadow: 0 0 32px color-mix(in oklab, #dc2626 22%, transparent);
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px color-mix(in oklab, var(--foreground) 35%, transparent);
+    color: transparent;
+  }
+
+  .text-outline-brand {
+    -webkit-text-stroke: 1px #dc2626;
+    color: transparent;
+  }
+
+  .dark .text-outline-brand {
+    -webkit-text-stroke: 1px color-mix(in oklab, #dc2626 85%, white);
+  }
+
+  .hero-accent {
+    color: #dc2626;
+  }
+
+  .hero-cell-meta {
+    color: color-mix(in oklab, #dc2626 70%, var(--muted-foreground));
+  }
+
+  .hero-progress-track {
+    background: color-mix(in oklab, #dc2626 12%, var(--foreground) 8%);
+  }
+
+  .hero-progress-bar {
+    background: linear-gradient(
+      90deg,
+      #dc2626,
+      color-mix(in oklab, #dc2626 65%, white)
+    );
+  }
+
+  .hero-cta-ring {
+    border-color: color-mix(in oklab, #dc2626 35%, var(--foreground) 15%);
+  }
+
+  .hero-cta-ring:hover {
+    border-color: #dc2626;
+    box-shadow: 0 0 20px color-mix(in oklab, #dc2626 35%, transparent);
+  }
+
+  .hero-cta-fill {
+    background-color: transparent;
+  }
+
+  .group:hover .hero-cta-fill {
+    background-color: #dc2626;
+  }
+
+  .hero-cta-label {
+    transition: color 0.35s ease;
+  }
+
+  .group:hover .hero-cta-label {
+    color: #dc2626;
+  }
+
+  .dark .group:hover .hero-cta-label {
+    color: color-mix(in oklab, #dc2626 90%, white);
+  }
+
+  .animate-loading-slide {
+    animation: loading-slide 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
