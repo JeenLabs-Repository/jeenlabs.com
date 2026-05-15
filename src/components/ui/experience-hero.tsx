@@ -11,7 +11,7 @@ export function ExperienceHero({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const revealRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
-  const { prefersReducedMotion } = useBreakpoint()
+  const { isMobileOrTablet, prefersReducedMotion } = useBreakpoint()
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -29,6 +29,12 @@ export function ExperienceHero({ className }: { className?: string }) {
         },
       )
     }, containerRef)
+
+    return () => ctx.revert()
+  }, [prefersReducedMotion])
+
+  useEffect(() => {
+    if (prefersReducedMotion || isMobileOrTablet) return
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!ctaRef.current) return
@@ -53,56 +59,60 @@ export function ExperienceHero({ className }: { className?: string }) {
     }
 
     window.addEventListener("mousemove", handleMouseMove)
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      ctx.revert()
-    }
-  }, [prefersReducedMotion])
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [prefersReducedMotion, isMobileOrTablet])
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative mx-auto flex w-full max-w-[100rem] flex-1 flex-col",
+        "relative mx-auto flex h-full min-h-0 w-full max-w-[100rem] flex-col",
         className,
-        "px-4 pt-[calc(4.25rem+env(safe-area-inset-top,0px))] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]",
-        "sm:px-6 sm:pb-8 md:px-8 md:pt-[calc(4.75rem+env(safe-area-inset-top,0px))]",
-        "lg:px-10 lg:pb-12 xl:px-16",
+        "px-4 pt-[calc(4rem+env(safe-area-inset-top,0px))]",
+        "pb-[max(1rem,env(safe-area-inset-bottom,0px))]",
+        "sm:px-6 sm:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]",
+        "md:px-8 md:pt-[calc(4.75rem+env(safe-area-inset-top,0px))]",
+        "lg:px-10 xl:px-16",
       )}
     >
       <div
         ref={revealRef}
-        className="relative flex w-full min-h-[calc(100dvh-5rem)] max-w-4xl flex-col justify-between pb-8 md:pb-6"
+        className={cn(
+          "relative flex min-h-0 w-full max-w-4xl flex-1 flex-col",
+          "justify-center gap-8 py-2",
+          "sm:gap-10 sm:py-4",
+          "lg:justify-between lg:gap-0 lg:py-0",
+        )}
       >
         <div
           aria-hidden
           className="hero-content-vignette pointer-events-none absolute inset-0 z-0"
         />
 
+        {/* Desktop-only spacer — preserves large-viewport vertical rhythm */}
         <div
           aria-hidden
-          className="relative z-10 flex shrink-0 items-center gap-3 invisible pointer-events-none"
+          className="relative z-10 hidden shrink-0 items-center gap-3 invisible pointer-events-none lg:flex"
         >
           <div className="size-2.5 shrink-0 rounded-full" />
-          <span className="font-mono text-[0.65rem] font-bold tracking-[0.2em] uppercase sm:text-[11px]">
+          <span className="font-mono text-[11px] font-bold tracking-[0.2em] uppercase">
             jeenlabs
           </span>
-          <span className="hidden font-mono text-[9px] tracking-widest uppercase sm:inline">
+          <span className="font-mono text-[9px] tracking-widest uppercase">
             Software studio
           </span>
         </div>
 
-        <div className="relative z-10 max-w-4xl lg:-translate-y-6">
-          <h1 className="text-[clamp(2.25rem,8vw,7.5rem)] font-black leading-[0.9] tracking-tighter text-foreground uppercase">
+        <div className="relative z-10 flex max-w-4xl flex-col gap-4 sm:gap-5">
+          <h1 className="hero-headline font-black tracking-tighter text-foreground uppercase">
             Build <br />
             products <br />
             <span className="text-outline-brand">with craft</span>
           </h1>
-          <p className="mt-6 max-w-sm font-mono text-[10px] leading-relaxed tracking-[0.3em] text-muted-foreground uppercase sm:text-[11px] sm:tracking-[0.35em]">
+          <p className="hero-description max-w-[34ch] text-muted-foreground sm:max-w-sm">
             We partner with teams to design and ship{" "}
-            <span className="hero-accent normal-case">thoughtful</span> digital
-            experiences — from idea to production.
+            <span className="hero-accent">thoughtful</span> digital experiences
+            — from idea to production.
           </p>
         </div>
 
@@ -110,11 +120,14 @@ export function ExperienceHero({ className }: { className?: string }) {
           ref={ctaRef}
           href="/sign-in"
           aria-label="Get started — sign in"
-          className="group relative z-10 flex w-fit shrink-0 items-center gap-5 lg:-translate-y-10"
+          className={cn(
+            "group relative z-10 flex w-fit min-h-11 shrink-0 touch-manipulation items-center gap-4 self-start",
+            "sm:gap-5",
+          )}
         >
           <div
             className={cn(
-              "hero-cta-ring flex size-12 items-center justify-center overflow-hidden rounded-full border transition-all duration-500 sm:size-14",
+              "hero-cta-ring flex size-11 items-center justify-center overflow-hidden rounded-full border transition-all duration-500 sm:size-12 md:size-14",
             )}
           >
             <div className="hero-cta-fill flex size-full items-center justify-center rounded-full transition-colors duration-500">
@@ -136,7 +149,7 @@ export function ExperienceHero({ className }: { className?: string }) {
               </svg>
             </div>
           </div>
-          <span className="hero-cta-label font-mono text-[10px] font-bold tracking-[0.2em] text-foreground uppercase sm:text-[11px]">
+          <span className="hero-cta-label font-mono text-[10px] font-bold tracking-[0.18em] text-foreground uppercase sm:text-[11px] sm:tracking-[0.2em]">
             Get Started
           </span>
         </Link>

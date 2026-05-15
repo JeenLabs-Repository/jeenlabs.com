@@ -147,13 +147,23 @@
 
   .hero-content-vignette {
     background: radial-gradient(
-      ellipse 100% 88% at 48% 44%,
-      rgba(255, 255, 255, 0.92) 0%,
-      transparent 68%
+      ellipse 92% 78% at 50% 46%,
+      rgba(255, 255, 255, 0.9) 0%,
+      transparent 62%
     );
   }
 
-  @media (width >= 48rem) {
+  @media (width >= 40rem) {
+    .hero-content-vignette {
+      background: radial-gradient(
+        ellipse 98% 85% at 48% 44%,
+        rgba(255, 255, 255, 0.92) 0%,
+        transparent 66%
+      );
+    }
+  }
+
+  @media (width >= 64rem) {
     .hero-content-vignette {
       background: radial-gradient(
         ellipse 105% 90% at 42% 42%,
@@ -165,19 +175,77 @@
 
   .dark .hero-content-vignette {
     background: radial-gradient(
-      ellipse 100% 88% at 48% 44%,
+      ellipse 92% 78% at 50% 46%,
       rgba(0, 0, 0, 0.92) 0%,
-      transparent 68%
+      transparent 62%
     );
   }
 
-  @media (width >= 48rem) {
+  @media (width >= 40rem) {
+    .dark .hero-content-vignette {
+      background: radial-gradient(
+        ellipse 98% 85% at 48% 44%,
+        rgba(0, 0, 0, 0.94) 0%,
+        transparent 66%
+      );
+    }
+  }
+
+  @media (width >= 64rem) {
     .dark .hero-content-vignette {
       background: radial-gradient(
         ellipse 105% 90% at 42% 42%,
         rgba(0, 0, 0, 1) 0%,
         transparent 72%
       );
+    }
+  }
+
+  .hero-headline {
+    font-size: clamp(2.375rem, 10.5vw, 3.5rem);
+    line-height: 0.92;
+  }
+
+  @media (width >= 40rem) {
+    .hero-headline {
+      font-size: clamp(2.75rem, 8.5vw, 4.75rem);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .hero-headline {
+      font-size: clamp(3.25rem, 7vw, 6rem);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .hero-headline {
+      font-size: clamp(3.75rem, 5.5vw, 7.5rem);
+      line-height: 0.9;
+    }
+  }
+
+  .hero-description {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    text-transform: none;
+  }
+
+  @media (width >= 48rem) {
+    .hero-description {
+      font-family: var(--font-geist-mono), ui-monospace, monospace;
+      font-size: 0.6875rem;
+      line-height: 1.65;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .hero-description {
+      font-size: 0.6875rem;
+      letter-spacing: 0.35em;
     }
   }
 

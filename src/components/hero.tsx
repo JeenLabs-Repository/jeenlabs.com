@@ -35,7 +35,7 @@ export function Hero() {
   return (
     <section
       className={cn(
-        "relative flex min-h-dvh w-full flex-col overflow-hidden",
+        "relative flex h-dvh max-h-dvh w-full flex-col overflow-hidden",
         "bg-white dark:bg-black",
       )}
     >
@@ -60,7 +60,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col">
+      <div className="relative z-10 flex h-full min-h-0 flex-1 flex-col">
         <ExperienceHero />
       </div>
     </section>
