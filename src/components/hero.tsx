@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect"
 import { JeenlabsLogo } from "@/components/jeenlabs-logo"
@@ -10,37 +12,65 @@ import { cn } from "@/lib/utils"
 
 const BRAND_RED = "#dc2626"
 
-const CANVAS_COLORS = [
-  [220, 38, 38],
-  [255, 255, 255],
-] as number[][]
+const CANVAS_COLORS = {
+  dark: [
+    [220, 38, 38],
+    [255, 255, 255],
+  ] as number[][],
+  light: [
+    [220, 38, 38],
+    [23, 23, 23],
+  ] as number[][],
+}
 
 export function Hero() {
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const { isMobile, isTablet, prefersReducedMotion } = useBreakpoint()
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const theme = mounted && resolvedTheme === "light" ? "light" : "dark"
   const dotSize = isMobile ? 3 : isTablet ? 4 : 5
   const animationSpeed = prefersReducedMotion ? 0 : isMobile ? 2.5 : 3
 
   return (
     <section
       className={cn(
-        "relative flex min-h-dvh w-full flex-col overflow-hidden bg-black",
+        "relative flex min-h-dvh w-full flex-col overflow-hidden",
+        "bg-white dark:bg-black",
       )}
     >
       <div className="absolute inset-0">
         {prefersReducedMotion ? (
-          <div className="size-full bg-black" />
+          <div className="size-full bg-white dark:bg-black" />
         ) : (
           <CanvasRevealEffect
+            key={theme}
             animationSpeed={animationSpeed}
-            containerClassName="bg-black"
-            colors={CANVAS_COLORS}
+            containerClassName="bg-white dark:bg-black"
+            colors={CANVAS_COLORS[theme]}
             dotSize={dotSize}
             showGradient
           />
         )}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,1)_0%,transparent_100%)]" />
-        <div className="absolute top-0 right-0 left-0 h-1/4 bg-gradient-to-b from-black to-transparent sm:h-1/3" />
+        <div
+          className={cn(
+            "absolute inset-0",
+            "bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.92)_0%,transparent_72%)]",
+            "dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.92)_0%,transparent_72%)]",
+            "sm:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.95)_0%,transparent_100%)]",
+            "sm:dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,1)_0%,transparent_100%)]",
+          )}
+        />
+        <div
+          className={cn(
+            "absolute top-0 right-0 left-0 h-1/4 bg-gradient-to-b from-white to-transparent sm:h-1/3",
+            "dark:from-black dark:to-transparent",
+          )}
+        />
       </div>
 
       <div
@@ -56,7 +86,7 @@ export function Hero() {
       >
         <JeenlabsLogo
           className={cn(
-            "mx-auto h-12 w-auto text-white sm:h-16 md:h-[4.5rem] lg:h-20",
+            "mx-auto h-12 w-auto text-foreground sm:h-16 md:h-[4.5rem] lg:h-20",
           )}
         />
 
@@ -72,7 +102,7 @@ export function Hero() {
 
         <h1
           className={cn(
-            "mt-3 max-w-[18ch] text-[1.75rem] font-semibold leading-[1.12] tracking-tight text-white",
+            "mt-3 max-w-[18ch] text-[1.75rem] font-semibold leading-[1.12] tracking-tight text-foreground",
             "min-[360px]:max-w-none min-[360px]:text-[2rem]",
             "sm:mt-4 sm:max-w-3xl sm:text-4xl sm:leading-[1.08]",
             "md:text-5xl",
@@ -85,7 +115,7 @@ export function Hero() {
 
         <p
           className={cn(
-            "mt-4 max-w-md text-sm leading-relaxed text-white/60",
+            "mt-4 max-w-md text-sm leading-relaxed text-muted-foreground",
             "sm:mt-6 sm:max-w-xl sm:text-base",
             "md:text-lg",
             "lg:max-w-2xl",
@@ -115,8 +145,8 @@ export function Hero() {
           <Link
             href="/#work"
             className={cn(
-              "inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/20 px-6 text-sm font-medium text-white transition-colors",
-              "hover:border-white/40 hover:bg-white/5 active:bg-white/10",
+              "inline-flex min-h-11 w-full items-center justify-center rounded-full border border-foreground/20 px-6 text-sm font-medium text-foreground transition-colors",
+              "hover:border-foreground/40 hover:bg-foreground/5 active:bg-foreground/10",
               "sm:w-auto sm:min-w-[10.5rem]",
             )}
           >

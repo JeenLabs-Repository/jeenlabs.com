@@ -53,7 +53,7 @@ export function CanvasRevealEffect({
         />
       </div>
       {showGradient && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
       )}
     </div>
   )
