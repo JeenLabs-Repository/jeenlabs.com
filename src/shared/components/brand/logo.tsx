@@ -1,12 +1,4 @@
-import Link from "next/link"
-
 import { cn } from "@/lib/utils"
-
-const ICON_SIZES = {
-  sm: "h-8 w-auto",
-  md: "h-9 w-auto sm:h-10",
-  lg: "h-12 w-auto md:h-14",
-} as const
 
 const WORDMARK_SIZES = {
   sm: "text-xl tracking-[0.2em]",
@@ -65,8 +57,6 @@ export function LogoMark({ className }: { className?: string }) {
   )
 }
 
-export { LogoMark as JeenlabsLogo }
-
 export function LogoWordmark({
   className,
   size = "md",
@@ -83,43 +73,8 @@ export function LogoWordmark({
       )}
     >
       <span className="text-foreground">JEENL</span>
-      <span className="text-[#dc2626]">A</span>
+      <span className="text-brand">A</span>
       <span className="text-foreground">BS</span>
     </div>
   )
-}
-
-export function Logo({
-  size = "md",
-  showText = true,
-  className,
-  linkToHome = false,
-}: {
-  size?: keyof typeof ICON_SIZES
-  showText?: boolean
-  className?: string
-  linkToHome?: boolean
-}) {
-  const content = (
-    <div
-      className={cn(
-        "flex items-center justify-center",
-        showText ? "gap-2 sm:gap-2.5" : "",
-        className,
-      )}
-    >
-      <LogoMark className={cn("text-foreground", ICON_SIZES[size])} />
-      {showText && <LogoWordmark size={size} />}
-    </div>
-  )
-
-  if (linkToHome) {
-    return (
-      <Link href="/" className="inline-flex cursor-pointer no-underline">
-        {content}
-      </Link>
-    )
-  }
-
-  return content
 }

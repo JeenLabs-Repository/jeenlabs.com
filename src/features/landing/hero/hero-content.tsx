@@ -1,13 +1,12 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 
-import { useBreakpoint } from "@/hooks/use-breakpoint"
+import { useBreakpoint } from "@/shared/hooks/use-breakpoint"
 import { cn } from "@/lib/utils"
 
-export function ExperienceHero({ className }: { className?: string }) {
+export function HeroContent({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const revealRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
@@ -111,19 +110,20 @@ export function ExperienceHero({ className }: { className?: string }) {
           </h1>
           <p className="hero-description max-w-[34ch] text-muted-foreground sm:max-w-sm">
             We partner with teams to design and ship{" "}
-            <span className="hero-accent">thoughtful</span> digital experiences
+            <span className="text-brand">thoughtful</span> digital experiences
             — from idea to production.
           </p>
         </div>
 
-        <Link
+        <a
           ref={ctaRef}
-          href="/sign-in"
-          aria-label="Get started — sign in"
+          href="#"
+          aria-label="Get started"
           className={cn(
             "group relative z-10 flex w-fit min-h-11 shrink-0 touch-manipulation items-center gap-4 self-start",
             "sm:gap-5",
           )}
+          onClick={(e) => e.preventDefault()}
         >
           <div
             className={cn(
@@ -152,7 +152,7 @@ export function ExperienceHero({ className }: { className?: string }) {
           <span className="hero-cta-label font-mono text-[10px] font-bold tracking-[0.18em] text-foreground uppercase sm:text-[11px] sm:tracking-[0.2em]">
             Get Started
           </span>
-        </Link>
+        </a>
       </div>
     </div>
   )

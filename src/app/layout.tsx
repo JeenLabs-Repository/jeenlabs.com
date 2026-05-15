@@ -1,43 +1,41 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter, Jost } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
+import type { Metadata, Viewport } from "next"
+import { Geist_Mono, Inter, Jost } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+import { Navbar } from "@/features/landing/navbar"
+import { ThemeProvider } from "@/shared/components/providers/theme-provider"
+import { cn } from "@/shared/lib/utils"
+
+import "./globals.css"
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 const jost = Jost({
   subsets: ["latin"],
   variable: "--font-brand",
   display: "swap",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
   title: "jeenlabs",
-  description: "Software studio — build products with clarity, speed, and craft.",
-};
+  description:
+    "Software studio — build products with clarity, speed, and craft.",
+}
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html
@@ -47,10 +45,9 @@ export default function RootLayout({
         "dark",
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
         inter.variable,
         jost.variable,
+        geistMono.variable,
         "font-sans",
       )}
     >
@@ -66,5 +63,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

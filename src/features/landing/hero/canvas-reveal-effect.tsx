@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react"
 import * as THREE from "three"
 
-import { useCanvasDpr } from "@/hooks/use-canvas-dpr"
+import { useCanvasDpr } from "@/shared/hooks/use-canvas-dpr"
 import { cn } from "@/lib/utils"
 
 type Uniforms = {

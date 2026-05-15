@@ -1,20 +1,16 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 
 import {
   ThemeToggle,
   type Theme,
 } from "@/components/ui/curtain-theme-toggle"
+import { useMounted } from "@/shared/hooks/use-mounted"
 
-export function ModeToggle() {
+export function ThemeToggleButton() {
   const { setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useMounted()
 
   if (!mounted) {
     return <div className="size-11 shrink-0" aria-hidden="true" />

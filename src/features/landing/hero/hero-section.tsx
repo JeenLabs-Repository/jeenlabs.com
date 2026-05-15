@@ -1,32 +1,18 @@
 "use client"
 
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
 
-import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect"
-import { ExperienceHero } from "@/components/ui/experience-hero"
-import { useBreakpoint } from "@/hooks/use-breakpoint"
-import { cn } from "@/lib/utils"
+import { CanvasRevealEffect } from "@/features/landing/hero/canvas-reveal-effect"
+import { HERO_CANVAS_COLORS } from "@/features/landing/hero/constants"
+import { HeroContent } from "@/features/landing/hero/hero-content"
+import { useBreakpoint } from "@/shared/hooks/use-breakpoint"
+import { useMounted } from "@/shared/hooks/use-mounted"
+import { cn } from "@/shared/lib/utils"
 
-const CANVAS_COLORS = {
-  dark: [
-    [220, 38, 38],
-    [255, 255, 255],
-  ] as number[][],
-  light: [
-    [220, 38, 38],
-    [23, 23, 23],
-  ] as number[][],
-}
-
-export function Hero() {
+export function HeroSection() {
   const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const mounted = useMounted()
   const { isMobile, isTablet, prefersReducedMotion } = useBreakpoint()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const theme = mounted && resolvedTheme === "light" ? "light" : "dark"
   const dotSize = isMobile ? 3 : isTablet ? 4 : 5
@@ -47,7 +33,7 @@ export function Hero() {
             key={theme}
             animationSpeed={animationSpeed}
             containerClassName="bg-white dark:bg-black"
-            colors={CANVAS_COLORS[theme]}
+            colors={HERO_CANVAS_COLORS[theme]}
             dotSize={dotSize}
             showGradient
           />
@@ -61,7 +47,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 flex h-full min-h-0 flex-1 flex-col">
-        <ExperienceHero />
+        <HeroContent />
       </div>
     </section>
   )
