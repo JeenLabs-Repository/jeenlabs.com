@@ -45,7 +45,7 @@ export function NotFound() {
 
           <h1
             id="not-found-heading"
-            className="hero-headline font-brand mt-5 font-black tracking-tighter text-foreground uppercase"
+            className="hero-headline mt-5 font-black tracking-tighter text-foreground uppercase"
           >
             This path{" "}
             <span className="text-outline-brand">isn&apos;t wired up</span>

@@ -4,13 +4,14 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 
 import { HamburgerButton } from "@/features/landing/hamburger-button"
-import { NAV_ITEMS } from "@/features/landing/nav"
+import { useNavItems } from "@/features/landing/use-nav-items"
 import { NavMenu } from "@/features/landing/nav-menu"
 import { ThemeToggleButton } from "@/features/landing/theme-toggle"
-import { LogoMark, LogoWordmark } from "@/shared/components/brand/logo"
+import { BrandLogo } from "@/shared/components/brand/logo"
 import { cn } from "@/shared/lib/utils"
 
 export function Navbar() {
+  const navItems = useNavItems()
   const [isOpen, setIsOpen] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
@@ -56,11 +57,10 @@ export function Navbar() {
         <Link
           href="/"
           prefetch={false}
-          className="pointer-events-auto inline-flex shrink-0 items-center gap-2 text-foreground transition-opacity hover:opacity-90 sm:gap-2.5"
+          className="pointer-events-auto text-foreground transition-opacity hover:opacity-90"
           aria-label="jeenlabs home"
         >
-          <LogoMark className="h-9 w-auto md:h-10" />
-          <LogoWordmark size="sm" />
+          <BrandLogo size="md" />
         </Link>
 
         <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 md:gap-3">
@@ -70,7 +70,7 @@ export function Navbar() {
       </header>
 
       <NavMenu
-        items={NAV_ITEMS}
+        items={navItems}
         isOpen={isOpen}
         showMenu={showMenu}
         onClose={closeMenu}

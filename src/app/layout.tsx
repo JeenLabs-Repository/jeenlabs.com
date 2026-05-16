@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Geist_Mono, Inter, Jost } from "next/font/google"
 
-import { Navbar } from "@/features/landing/navbar"
 import { ThemeProvider } from "@/shared/components/providers/theme-provider"
 import { cn } from "@/shared/lib/utils"
 
@@ -59,8 +58,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex min-h-dvh w-full flex-1 flex-col">
-            <Navbar />
-            <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+            {children}
           </div>
         </ThemeProvider>
       </body>

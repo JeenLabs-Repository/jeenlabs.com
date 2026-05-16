@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 
+import { authPath } from "@/lib/auth-urls"
 import { useBreakpoint } from "@/shared/hooks/use-breakpoint"
 import { cn } from "@/lib/utils"
 
@@ -117,13 +118,12 @@ export function HeroContent({ className }: { className?: string }) {
 
         <a
           ref={ctaRef}
-          href="#"
+          href={authPath("sign-in")}
           aria-label="Get started"
           className={cn(
             "group relative z-10 flex w-fit min-h-11 shrink-0 touch-manipulation items-center gap-4 self-start",
             "sm:gap-5",
           )}
-          onClick={(e) => e.preventDefault()}
         >
           <div
             className={cn(

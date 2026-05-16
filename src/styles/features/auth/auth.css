@@ -1,0 +1,201 @@
+@layer components {
+  .auth-page-bg {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(
+        900px circle at 15% -10%,
+        color-mix(in oklab, var(--brand) 9%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        700px circle at 95% 110%,
+        color-mix(in oklab, var(--foreground) 5%, transparent),
+        transparent 50%
+      );
+  }
+
+  .auth-page-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+  }
+
+  /* —— Mobile & tablet: single-column card, scrollable page —— */
+  .auth-page {
+    min-height: 100dvh;
+  }
+
+  .auth-page-main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding-block: 0.75rem 1.5rem;
+    padding-inline: 1rem;
+  }
+
+  @media (width >= 40rem) {
+    .auth-page-main {
+      align-items: center;
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 26rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+    background: color-mix(in oklab, var(--card) 88%, transparent);
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--foreground) 3%, transparent) inset,
+      0 24px 48px -24px color-mix(in oklab, var(--foreground) 12%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .auth-card::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.5rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--brand) 65%, transparent),
+      transparent
+    );
+  }
+
+  .auth-card-aside {
+    display: none;
+  }
+
+  .auth-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.75rem 1.5rem 2rem;
+  }
+
+  @media (width >= 40rem) {
+    .auth-card-form {
+      padding: 2rem 1.75rem 2.25rem;
+    }
+  }
+
+  .auth-card-form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .auth-card-form-title {
+    font-family: var(--font-heading), var(--font-sans), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  .auth-card-form-lead {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  /* —— Desktop: split card, fixed viewport (unchanged feel) —— */
+  @media (width >= 64rem) {
+    .auth-page {
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+
+    .auth-page-main {
+      min-height: 0;
+      overflow: hidden;
+      align-items: center;
+      padding-block: 1.25rem;
+      padding-inline: 2.5rem;
+    }
+
+    .auth-card {
+      max-width: min(72rem, calc(100vw - 5rem));
+      max-height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(26rem, 34rem);
+      border-radius: 1rem;
+    }
+
+    .auth-card::before {
+      inset-inline: 2rem;
+    }
+
+    .auth-card-aside {
+      display: flex;
+    }
+
+    .auth-card-form {
+      min-height: 0;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2.25rem 2.5rem;
+    }
+
+    .auth-card-form--compact {
+      gap: 1rem;
+      padding: 2rem 2.5rem;
+    }
+
+    .auth-card-form-header {
+      align-items: flex-start;
+      gap: 0.75rem;
+      text-align: left;
+    }
+
+    .auth-card-form-title {
+      font-size: 1.5rem;
+    }
+
+    .auth-card-form-lead {
+      display: none;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .auth-page-main {
+      padding-inline: 3.5rem;
+    }
+
+    .auth-card {
+      max-width: min(80rem, calc(100vw - 6rem));
+      grid-template-columns: minmax(0, 1.1fr) 36rem;
+    }
+
+    .auth-card-form {
+      padding-inline: 2.75rem;
+    }
+  }
+
+  .auth-aside-heading {
+    font-family: var(--font-heading), var(--font-sans), sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  @media (width >= 80rem) {
+    .auth-aside-heading {
+      font-size: 1.5rem;
+    }
+  }
+}

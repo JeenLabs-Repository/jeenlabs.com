@@ -1,9 +1,30 @@
 import { cn } from "@/lib/utils"
 
+/** Mark viewBox is 340×413 — keep width derived from height for consistent alignment */
+const MARK_ASPECT = "aspect-[340/413]"
+
 const WORDMARK_SIZES = {
   sm: "text-xl tracking-[0.2em]",
   md: "text-lg tracking-[0.36em] sm:text-xl sm:tracking-[0.4em]",
   lg: "text-2xl tracking-[0.4em]",
+} as const
+
+const BRAND_LOGO_SIZES = {
+  sm: {
+    mark: "h-8",
+    wordmark: "sm" as const,
+    gap: "gap-2",
+  },
+  md: {
+    mark: "h-9 md:h-10",
+    wordmark: "sm" as const,
+    gap: "gap-2 sm:gap-2.5",
+  },
+  lg: {
+    mark: "h-10 xl:h-11",
+    wordmark: "md" as const,
+    gap: "gap-2.5 sm:gap-3",
+  },
 } as const
 
 export function LogoMark({ className }: { className?: string }) {
@@ -12,7 +33,7 @@ export function LogoMark({ className }: { className?: string }) {
       viewBox="0 0 340 413"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("block shrink-0", className)}
+      className={cn("block w-auto shrink-0", MARK_ASPECT, className)}
       aria-hidden
     >
       <g>
@@ -65,9 +86,9 @@ export function LogoWordmark({
   size?: keyof typeof WORDMARK_SIZES
 }) {
   return (
-    <div
+    <span
       className={cn(
-        "font-brand text-center font-semibold leading-none",
+        "font-brand inline-block font-semibold leading-none whitespace-nowrap",
         WORDMARK_SIZES[size],
         className,
       )}
@@ -75,6 +96,41 @@ export function LogoWordmark({
       <span className="text-foreground">JEENL</span>
       <span className="text-brand">A</span>
       <span className="text-foreground">BS</span>
-    </div>
+    </span>
+  )
+}
+
+/** Standard mark + JEENLABS wordmark lockup — use everywhere for brand consistency */
+export function BrandLogo({
+  size = "md",
+  className,
+  markClassName,
+  wordmarkClassName,
+  showWordmark = true,
+}: {
+  size?: keyof typeof BRAND_LOGO_SIZES
+  className?: string
+  markClassName?: string
+  wordmarkClassName?: string
+  showWordmark?: boolean
+}) {
+  const preset = BRAND_LOGO_SIZES[size]
+
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 items-center text-foreground",
+        preset.gap,
+        className,
+      )}
+    >
+      <LogoMark className={cn(preset.mark, markClassName)} />
+      {showWordmark ? (
+        <LogoWordmark
+          size={preset.wordmark}
+          className={cn("translate-y-px", wordmarkClassName)}
+        />
+      ) : null}
+    </span>
   )
 }

@@ -16,7 +16,13 @@
     -webkit-text-stroke: 1px color-mix(in oklab, var(--brand) 85%, white);
   }
 
+  /** Jost — logo wordmark and brand lockups only */
   .font-brand {
     font-family: var(--font-brand), var(--font-sans), sans-serif;
+  }
+
+  /** Inter — page headings, UI titles, marketing copy */
+  .font-heading {
+    font-family: var(--font-heading), var(--font-sans), sans-serif;
   }
 }
