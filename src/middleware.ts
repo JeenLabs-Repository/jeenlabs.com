@@ -8,8 +8,13 @@ const AUTH_PATHS = ["/sign-in", "/sign-up"] as const
  * Local dev keeps /sign-in on localhost unless you map auth.localhost.
  */
 export function middleware(request: NextRequest) {
-  const authHost = process.env.AUTH_HOST
-  if (!authHost || process.env.NODE_ENV !== "production") {
+  const authHost = process.env.AUTH_HOST?.trim()
+  // Only redirect when explicitly enabled — avoids sending users to an undeployed subdomain.
+  if (
+    !authHost ||
+    process.env.AUTH_SUBDOMAIN_ENABLED !== "true" ||
+    process.env.NODE_ENV !== "production"
+  ) {
     return NextResponse.next()
   }
 

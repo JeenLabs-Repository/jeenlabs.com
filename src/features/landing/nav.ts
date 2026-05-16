@@ -11,5 +11,4 @@ export const PUBLIC_NAV_ITEMS: readonly NavItem[] = [
   { label: "sign in", href: authPath("sign-in"), ariaLabel: "Sign in" },
 ] as const
 
-/** @deprecated Use `useNavItems()` for session-aware navigation. */
 export const NAV_ITEMS = PUBLIC_NAV_ITEMS

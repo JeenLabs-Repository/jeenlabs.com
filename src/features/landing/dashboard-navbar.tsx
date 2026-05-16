@@ -3,14 +3,15 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
+import { useDashboardNavItems } from "@/features/landing/dashboard-nav-items"
 import { HamburgerButton } from "@/features/landing/hamburger-button"
-import { PUBLIC_NAV_ITEMS } from "@/features/landing/nav"
 import { NavMenu } from "@/features/landing/nav-menu"
 import { ThemeToggleButton } from "@/features/landing/theme-toggle"
 import { BrandLogo } from "@/shared/components/brand/logo"
 import { cn } from "@/shared/lib/utils"
 
-export function Navbar() {
+export function DashboardNavbar() {
+  const navItems = useDashboardNavItems()
   const [isOpen, setIsOpen] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
@@ -69,7 +70,7 @@ export function Navbar() {
       </header>
 
       <NavMenu
-        items={PUBLIC_NAV_ITEMS}
+        items={navItems}
         isOpen={isOpen}
         showMenu={showMenu}
         onClose={closeMenu}
