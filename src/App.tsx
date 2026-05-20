@@ -1,4 +1,6 @@
 import { useState } from 'react'
+
+import { ModeToggle } from '@/components/mode-toggle'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -9,6 +11,9 @@ function App() {
 
   return (
     <>
+      <div className="fixed top-4 right-4 z-50">
+        <ModeToggle />
+      </div>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
