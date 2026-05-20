@@ -11,8 +11,12 @@
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
+    "@types/mdx": "^2.0.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "fumadocs-core": "^16.8.12",
+    "fumadocs-mdx": "^15.0.7",
+    "fumadocs-ui": "^16.8.12",
     "lucide-react": "^1.16.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.6",
