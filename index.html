@@ -7,13 +7,9 @@
     <title>jeenlabs</title>
     <script>
       ;(function () {
-        const stored = localStorage.getItem('theme')
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        const isDark =
-          stored === 'dark' ||
-          (stored === 'system' && prefersDark) ||
-          (!stored && prefersDark)
-        if (isDark) document.documentElement.classList.add('dark')
+        if (localStorage.getItem('theme') !== 'light') {
+          document.documentElement.classList.add('dark')
+        }
       })()
     </script>
   </head>
