@@ -1,3 +1,4 @@
+import type { ComponentProps, ComponentType } from 'react'
 import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import {
   DocsBody,
@@ -13,18 +14,28 @@ import { baseOptions } from '@/lib/layout.shared'
 import { getDocsSlugs } from '@/lib/navigation'
 import { useMDXComponents } from '@/components/mdx'
 
+type DocMdxContentProps = {
+  toc: ComponentProps<typeof DocsPageLayout>['toc']
+  frontmatter: { title?: string; description?: string }
+  default: ComponentType<{ components?: ReturnType<typeof useMDXComponents> }>
+}
+
+function DocMdxContent({ toc, frontmatter, default: Mdx }: DocMdxContentProps) {
+  const components = useMDXComponents()
+
+  return (
+    <DocsPageLayout toc={toc}>
+      <DocsTitle>{frontmatter.title}</DocsTitle>
+      <DocsDescription>{frontmatter.description}</DocsDescription>
+      <DocsBody>
+        <Mdx components={components} />
+      </DocsBody>
+    </DocsPageLayout>
+  )
+}
+
 const clientLoader = browserCollections.docs.createClientLoader({
-  component({ toc, frontmatter, default: Mdx }) {
-    return (
-      <DocsPageLayout toc={toc}>
-        <DocsTitle>{frontmatter.title}</DocsTitle>
-        <DocsDescription>{frontmatter.description}</DocsDescription>
-        <DocsBody>
-          <Mdx components={useMDXComponents()} />
-        </DocsBody>
-      </DocsPageLayout>
-    )
-  },
+  component: DocMdxContent,
 })
 
 export function DocsRoute() {

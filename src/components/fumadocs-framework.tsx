@@ -1,6 +1,7 @@
 import { FrameworkProvider } from 'fumadocs-core/framework'
 import {
   type ComponentProps,
+  type CSSProperties,
   type ReactNode,
   useCallback,
   useMemo,
@@ -8,37 +9,53 @@ import {
 import { usePathname } from '@/hooks/use-pathname'
 import { getDocsSlugs, navigate } from '@/lib/navigation'
 
+const linkButtonStyle: CSSProperties = {
+  background: 'none',
+  border: 'none',
+  padding: 0,
+  font: 'inherit',
+  color: 'inherit',
+  cursor: 'pointer',
+  textAlign: 'inherit',
+}
+
+function isExternalHref(href: string): boolean {
+  return (
+    href.startsWith('http://') ||
+    href.startsWith('https://') ||
+    href.startsWith('//')
+  )
+}
+
 function FrameworkLink({
   href = '#',
   children,
   prefetch: _prefetch,
+  className,
+  style,
   ...props
 }: ComponentProps<'a'> & { prefetch?: boolean }) {
+  if (isExternalHref(href)) {
+    return (
+      <a href={href} className={className} style={style} {...props}>
+        {children}
+      </a>
+    )
+  }
+
+  const destination = new URL(href, window.location.origin)
+
   return (
-    <a
-      href={href}
-      {...props}
-      onClick={(event) => {
-        if (
-          event.defaultPrevented ||
-          event.button !== 0 ||
-          event.metaKey ||
-          event.ctrlKey ||
-          event.shiftKey ||
-          event.altKey
-        ) {
-          return
-        }
-
-        const url = new URL(href, window.location.origin)
-        if (url.origin !== window.location.origin) return
-
-        event.preventDefault()
-        navigate(`${url.pathname}${url.search}${url.hash}`)
-      }}
+    <button
+      type="button"
+      className={className}
+      style={{ ...linkButtonStyle, ...style }}
+      onClick={() =>
+        navigate(`${destination.pathname}${destination.search}${destination.hash}`)
+      }
     >
       {children}
-    </a>
+    </button>
   )
 }
 
