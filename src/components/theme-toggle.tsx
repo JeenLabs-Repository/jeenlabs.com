@@ -1,14 +1,12 @@
 import { Moon, Sun } from 'lucide-react'
-import { useState } from 'react'
-import { getTheme, setTheme, type Theme } from '@/lib/theme'
+import { useTheme } from '@/hooks/use-theme'
+import { setTheme } from '@/lib/theme'
 
 export function ThemeToggle() {
-  const [theme, setThemeState] = useState<Theme>(() => getTheme())
+  const theme = useTheme()
 
   function handleToggle() {
-    const next: Theme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    setThemeState(next)
+    setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
   const isDark = theme === 'dark'

@@ -1,6 +1,8 @@
 import React, { useMemo, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
+import { useTheme } from '@/hooks/use-theme'
+import { getGlitterPreset } from '@/lib/glitter-theme'
 import { cn } from '@/lib/utils'
 
 type Uniforms = {
@@ -33,6 +35,7 @@ function CanvasRevealEffect({
   dotSize,
   showGradient = true,
   reverse = false,
+  fadeFromClass = 'from-black',
 }: {
   animationSpeed?: number
   opacities?: number[]
@@ -41,6 +44,7 @@ function CanvasRevealEffect({
   dotSize?: number
   showGradient?: boolean
   reverse?: boolean
+  fadeFromClass?: string
 }) {
   return (
     <div className={cn('relative h-full w-full', containerClassName)}>
@@ -57,7 +61,12 @@ function CanvasRevealEffect({
         />
       </div>
       {showGradient && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+        <div
+          className={cn(
+            'absolute inset-0 bg-gradient-to-t to-transparent',
+            fadeFromClass,
+          )}
+        />
       )}
     </div>
   )
@@ -312,30 +321,41 @@ export function DotMatrixGlitterAnimation({
   className,
   animationSpeed = 3,
   dotSize = 6,
-  colors = [
-    [255, 255, 255],
-    [255, 255, 255],
-  ],
+  colors: colorsProp,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
   showGradient = true,
 }: DotMatrixGlitterAnimationProps) {
+  const theme = useTheme()
+  const preset = getGlitterPreset(theme)
+  const colors = colorsProp ?? preset.colors
+
   return (
     <div
-      className={cn('relative min-h-svh w-full bg-black', className)}
+      className={cn(
+        'relative min-h-svh w-full',
+        preset.backgroundClass,
+        className,
+      )}
       aria-hidden
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" key={theme}>
         <CanvasRevealEffect
           animationSpeed={animationSpeed}
-          containerClassName="bg-black"
+          containerClassName={preset.backgroundClass}
           colors={colors}
           dotSize={dotSize}
           opacities={opacities}
           reverse={false}
           showGradient={showGradient}
+          fadeFromClass={preset.fadeFromClass}
         />
       </div>
-      <div className="pointer-events-none absolute top-0 right-0 left-0 h-1/3 bg-gradient-to-b from-black to-transparent" />
+      <div
+        className={cn(
+          'pointer-events-none absolute top-0 right-0 left-0 h-1/3 bg-gradient-to-b to-transparent',
+          preset.fadeFromClass,
+        )}
+      />
     </div>
   )
 }

@@ -99,6 +99,12 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   --border: var(--page-border);
+
+  --glitter-vignette: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.18) 0%,
+    transparent 72%
+  );
 }
 
 #root {
@@ -244,6 +250,12 @@ code {
   --sidebar-ring: oklch(0.556 0 0);
 
   --border: oklch(1 0 0 / 10%);
+
+  --glitter-vignette: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 1) 0%,
+    transparent 100%
+  );
 }
 
 .dark #social .button-icon {
