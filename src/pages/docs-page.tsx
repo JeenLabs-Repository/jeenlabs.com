@@ -1,4 +1,5 @@
 import type { ComponentProps, ComponentType } from 'react'
+import type { MDXComponents } from 'mdx/types'
 import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import {
   DocsBody,
@@ -17,7 +18,7 @@ import { useMDXComponents } from '@/components/mdx'
 type DocMdxContentProps = {
   toc: ComponentProps<typeof DocsPageLayout>['toc']
   frontmatter: { title?: string; description?: string }
-  default: ComponentType<{ components?: ReturnType<typeof useMDXComponents> }>
+  default: ComponentType<{ components?: MDXComponents }>
 }
 
 function DocMdxContent({ toc, frontmatter, default: Mdx }: DocMdxContentProps) {
