@@ -11,8 +11,8 @@ export function getGlitterPreset(theme: AppTheme): GlitterPreset {
   if (theme === 'light') {
     return {
       colors: [
-        [26, 26, 26],
-        [170, 59, 255],
+        [255, 0, 0],
+        [140, 30, 30],
       ],
       backgroundClass: 'bg-[var(--bg)]',
       fadeFromClass: 'from-[var(--bg)]',
@@ -21,8 +21,8 @@ export function getGlitterPreset(theme: AppTheme): GlitterPreset {
 
   return {
     colors: [
-      [243, 244, 246],
-      [192, 132, 252],
+      [255, 0, 0],
+      [255, 255, 255],
     ],
     backgroundClass: 'bg-background',
     fadeFromClass: 'from-background',
