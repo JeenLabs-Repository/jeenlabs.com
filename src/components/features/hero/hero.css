@@ -1,3 +1,10 @@
 .hero-section {
+  position: relative;
   width: 100%;
+  min-height: 80svh;
+  overflow: hidden;
+}
+
+.hero-section__glitter {
+  min-height: 80svh;
 }
