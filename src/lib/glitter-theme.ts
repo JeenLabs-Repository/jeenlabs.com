@@ -2,6 +2,8 @@ import type { AppTheme } from '@/hooks/use-theme'
 
 export type GlitterPreset = {
   colors: number[][]
+  /** Higher floor on light backgrounds — additive blend fades pale dots on white. */
+  opacities?: number[]
   backgroundClass: string
   fadeFromClass: string
 }
@@ -12,8 +14,9 @@ export function getGlitterPreset(theme: AppTheme): GlitterPreset {
     return {
       colors: [
         [255, 0, 0],
-        [140, 30, 30],
+        [185, 55, 55],
       ],
+      opacities: [0.45, 0.45, 0.45, 0.6, 0.6, 0.6, 0.85, 0.85, 0.85, 1],
       backgroundClass: 'bg-[var(--bg)]',
       fadeFromClass: 'from-[var(--bg)]',
     }

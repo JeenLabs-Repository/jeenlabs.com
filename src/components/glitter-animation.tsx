@@ -336,12 +336,16 @@ export function GlitterAnimation({
   className,
   dotSize = 6,
   colors: colorsProp,
-  opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
+  opacities: opacitiesProp,
   showGradient = true,
 }: GlitterAnimationProps) {
   const theme = useTheme()
   const preset = getGlitterPreset(theme)
   const colors = colorsProp ?? preset.colors.map((color) => [...color])
+  const opacities = preset.opacities ?? opacitiesProp
+  const resolvedOpacities =
+    opacities ??
+    [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
 
   return (
     <div
@@ -357,7 +361,7 @@ export function GlitterAnimation({
           containerClassName={preset.backgroundClass}
           colors={colors}
           dotSize={dotSize}
-          opacities={opacities}
+          opacities={resolvedOpacities}
           reverse={false}
           showGradient={showGradient}
           fadeFromClass={preset.fadeFromClass}
