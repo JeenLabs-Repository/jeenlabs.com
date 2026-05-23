@@ -2,7 +2,7 @@ import { Hero } from '@/components/features/hero/Hero'
 
 export function Homepage() {
   return (
-    <main className="flex min-h-svh w-full flex-col">
+    <main className="flex min-h-0 flex-1 flex-col">
       <Hero />
     </main>
   )

@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/jost";
+@import "@fontsource-variable/geist-mono";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -20,8 +21,8 @@
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --heading: 'Inter Variable', sans-serif;
+  --mono: 'Geist Mono Variable', ui-monospace, monospace;
 
   font: 16px/145% var(--sans);
   letter-spacing: 0.16px;
@@ -101,46 +102,13 @@
 
 #root {
   width: 100%;
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 36px;
-  letter-spacing: -1.08px;
-  margin: 20px 0;
-
-  @media (width >= theme(--breakpoint-lg)) {
-    font-size: 56px;
-    letter-spacing: -1.68px;
-    margin: 32px 0;
-  }
-}
-h2 {
-  font-size: 20px;
-  line-height: 118%;
-  letter-spacing: -0.2px;
-  margin: 0 0 8px;
-
-  @media (width >= theme(--breakpoint-lg)) {
-    font-size: 24px;
-    letter-spacing: -0.24px;
-  }
-}
-p {
   margin: 0;
 }
 
@@ -168,6 +136,7 @@ code {
   --font-heading: var(--font-sans);
   --font-brand: 'Jost Variable', var(--font-sans), sans-serif;
   --font-sans: 'Inter Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --color-brand: var(--brand);
   --color-brand-bg: var(--brand-bg);
   --color-brand-border: var(--brand-border);
