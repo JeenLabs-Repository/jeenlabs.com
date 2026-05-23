@@ -7,6 +7,8 @@ export type GlitterThemePreset = {
   colors: number[][]
   /** Tailwind `from-*` class for edge fade overlays */
   fadeFromClass: string
+  /** Center radial vignette overlay */
+  vignetteBackground: string
 }
 
 /** Dot-matrix colors and fades per site theme */
@@ -18,6 +20,8 @@ export const GLITTER_THEME_PRESETS: Record<Theme, GlitterThemePreset> = {
       [107, 99, 117],
     ],
     fadeFromClass: 'from-[var(--bg)]',
+    vignetteBackground:
+      'radial-gradient(circle at center, var(--bg) 0%, transparent 72%)',
   },
   dark: {
     backgroundClass: 'bg-black',
@@ -26,6 +30,8 @@ export const GLITTER_THEME_PRESETS: Record<Theme, GlitterThemePreset> = {
       [255, 255, 255],
     ],
     fadeFromClass: 'from-black',
+    vignetteBackground:
+      'radial-gradient(circle at center, rgba(0, 0, 0, 1) 0%, transparent 100%)',
   },
 }
 
