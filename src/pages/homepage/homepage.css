@@ -1,0 +1,8 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+}
