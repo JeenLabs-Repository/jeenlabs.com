@@ -22,8 +22,8 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 16px/145% var(--sans);
+  letter-spacing: 0.16px;
   color-scheme: light;
   color: var(--text);
   background: var(--bg);
@@ -32,8 +32,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+  @media (width >= theme(--breakpoint-lg)) {
+    font-size: 18px;
+    letter-spacing: 0.18px;
   }
 
   --background: oklch(1 0 0);
@@ -117,21 +118,25 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  font-size: 36px;
+  letter-spacing: -1.08px;
+  margin: 20px 0;
+
+  @media (width >= theme(--breakpoint-lg)) {
+    font-size: 56px;
+    letter-spacing: -1.68px;
+    margin: 32px 0;
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 118%;
-  letter-spacing: -0.24px;
+  letter-spacing: -0.2px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  @media (width >= theme(--breakpoint-lg)) {
+    font-size: 24px;
+    letter-spacing: -0.24px;
   }
 }
 p {
@@ -154,6 +159,11 @@ code {
 }
 
 @theme inline {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);

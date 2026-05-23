@@ -1,11 +1,13 @@
 import { GlitterAnimation } from '@/components/glitter-animation'
-
-import './hero.css'
+import { HERO_MIN_HEIGHT_CLASS } from '@/config/breakpoints'
 
 export function Hero() {
   return (
-    <section className="hero-section" aria-label="Hero">
-      <GlitterAnimation className="hero-section__glitter" showGradient />
+    <section
+      className={`relative w-full overflow-hidden ${HERO_MIN_HEIGHT_CLASS}`}
+      aria-label="Hero"
+    >
+      <GlitterAnimation className={`w-full ${HERO_MIN_HEIGHT_CLASS}`} showGradient />
     </section>
   )
 }

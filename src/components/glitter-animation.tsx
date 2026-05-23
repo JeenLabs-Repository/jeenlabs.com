@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
 import { useTheme } from '@/hooks/use-theme'
+import { useResponsiveGlitterDotSize } from '@/hooks/use-breakpoint'
 import { getGlitterPreset } from '@/lib/glitter-theme'
 import { cn } from '@/lib/utils'
 
@@ -334,12 +335,14 @@ const Shader: React.FC<{
 
 export function GlitterAnimation({
   className,
-  dotSize = 6,
+  dotSize: dotSizeProp,
   colors: colorsProp,
   opacities: opacitiesProp,
   showGradient = true,
 }: GlitterAnimationProps) {
   const theme = useTheme()
+  const responsiveDotSize = useResponsiveGlitterDotSize()
+  const dotSize = dotSizeProp ?? responsiveDotSize
   const preset = getGlitterPreset(theme)
   const colors = colorsProp ?? preset.colors.map((color) => [...color])
   const opacities = preset.opacities ?? opacitiesProp
@@ -350,7 +353,7 @@ export function GlitterAnimation({
   return (
     <div
       className={cn(
-        'relative min-h-svh w-full',
+        'relative w-full min-h-svh',
         preset.backgroundClass,
         className,
       )}

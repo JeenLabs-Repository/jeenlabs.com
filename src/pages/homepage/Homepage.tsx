@@ -1,10 +1,8 @@
 import { Hero } from '@/components/features/hero/Hero'
 
-import './homepage.css'
-
 export function Homepage() {
   return (
-    <main className="homepage">
+    <main className="flex min-h-svh w-full flex-col">
       <Hero />
     </main>
   )
