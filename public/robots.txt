@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /404-error
+
+Sitemap: https://jeenlabs.com/sitemap.xml

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { BrandLogo } from '@/components/brand/logo'
 import { NavMenu } from '@/components/navigation/NavMenu'
@@ -84,13 +85,13 @@ export function Navbar() {
           'md:pr-[max(2.5rem,env(safe-area-inset-right,0px))]',
         )}
       >
-        <a
-          href="/"
+        <Link
+          to="/"
           className="pointer-events-auto text-foreground transition-opacity hover:opacity-90"
           aria-label="JeenLabs home"
         >
           <BrandLogo size="md" />
-        </a>
+        </Link>
 
         <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 md:gap-3">
           <ModeToggle variant="icon" buttonSize={44} />

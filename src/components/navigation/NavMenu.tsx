@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 
 import type { NavItem } from '@/components/navigation/nav.config'
@@ -94,8 +95,8 @@ export function NavMenu({
         <ul className="m-0 flex list-none flex-col items-end p-0 text-right">
           {items.map((item, index) => (
             <li key={item.href} className="w-full border-y border-border/50">
-              <a
-                href={item.href}
+              <Link
+                to={item.href}
                 aria-label={item.ariaLabel}
                 className={cn(
                   'group flex flex-row-reverse items-baseline gap-3 py-4 no-underline touch-manipulation',
@@ -118,7 +119,7 @@ export function NavMenu({
                 >
                   {item.label}
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
