@@ -1,5 +1,8 @@
 import { Geist_Mono, Inter, Jost } from "next/font/google";
 
+import { Navbar } from "@/components/navbar";
+import { Providers } from "@/components/providers";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -32,7 +35,10 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable} ${jost.variable} dark min-h-dvh antialiased font-sans`}
     >
       <body className="min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
-        <main>{children}</main>
+        <Providers>
+          <Navbar />
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
