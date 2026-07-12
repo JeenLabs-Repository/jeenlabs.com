@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+
 import { CanvasRevealEffect } from "@/components/background/canvas-reveal-effect";
 import { useJeenlabsBreakpoint } from "@/hooks/use-jeenlabs-breakpoint";
 import { useMounted } from "@/hooks/use-mounted";
@@ -16,11 +17,18 @@ export function AnimatedBackground({ className }: { className?: string }) {
 
   const theme = mounted && resolvedTheme === "light" ? "light" : "dark";
   const dotSize = breakpoint === "mobile" ? 3 : breakpoint === "tablet" ? 4 : 5;
+  // Aceternity speed range is ~0.1–1.0 (monorepo GLSL effectively used 0.5)
   const animationSpeed = prefersReducedMotion
     ? 0
     : breakpoint === "mobile"
-      ? 2.5
-      : 3;
+      ? 0.45
+      : 0.55;
+
+  const colors = CANVAS_BACKGROUND_COLORS[theme].map((rgb) => [
+    rgb[0]!,
+    rgb[1]!,
+    rgb[2]!,
+  ]);
 
   return (
     <div
@@ -37,7 +45,7 @@ export function AnimatedBackground({ className }: { className?: string }) {
           key={theme}
           animationSpeed={animationSpeed}
           containerClassName="bg-background"
-          colors={[...CANVAS_BACKGROUND_COLORS[theme]]}
+          colors={colors}
           dotSize={dotSize}
           showGradient
         />

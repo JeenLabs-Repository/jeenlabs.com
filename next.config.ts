@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
-    optimizePackageImports: ["gsap", "three"],
+    // Keep `three` out — optimizePackageImports can break WebGL namespace imports.
+    optimizePackageImports: ["gsap"],
   },
   async headers() {
     return [
