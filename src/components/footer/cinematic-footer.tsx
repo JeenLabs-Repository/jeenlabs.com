@@ -53,9 +53,8 @@ function MarqueeItem() {
 }
 
 /**
- * Contact lives in normal document flow so the full “Ready to build”
- * chapter is always reachable on phones and short laptop viewports.
- * (The old fixed + clip-path reveal clipped the form on mobile.)
+ * Contact in document flow (fully visible on mobile).
+ * Iconic JEENLABS watermark matches the monorepo cinematic footer.
  */
 export function CinematicFooter() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,35 +73,34 @@ export function CinematicFooter() {
       if (cancelled) return;
 
       const ctx = gsap.context(() => {
-        if (giantTextRef.current) {
-          gsap.fromTo(
-            giantTextRef.current,
-            { y: 48, opacity: 0.15 },
-            {
-              y: 0,
-              opacity: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 85%",
-                end: "bottom bottom",
-                scrub: 1,
-              },
+        gsap.fromTo(
+          giantTextRef.current,
+          { y: "10vh", scale: 0.8, opacity: 0 },
+          {
+            y: "0vh",
+            scale: 1,
+            opacity: 1,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              end: "bottom bottom",
+              scrub: 1,
             },
-          );
-        }
+          },
+        );
 
         gsap.fromTo(
           contentRef.current,
-          { y: 36, opacity: 0 },
+          { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.85,
+            duration: 0.9,
             ease: "power3.out",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top 78%",
+              start: "top 70%",
               toggleActions: "play none none none",
             },
           },
@@ -138,18 +136,35 @@ export function CinematicFooter() {
       className={cn(
         "relative isolate w-full overflow-hidden",
         "border-t border-brand/20",
-        "bg-[color-mix(in_oklch,var(--background)_90%,var(--brand)_4%)]",
+        "bg-background/75",
       )}
     >
+      {/* Monorepo iconic watermark — same classes + bottom placement */}
       <div
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        ref={giantTextRef}
+        className={cn(
+          "group absolute -bottom-[5vh] left-1/2 z-0 w-max -translate-x-1/2 text-center whitespace-nowrap select-none",
+          "cursor-default transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
+          "hover:scale-[1.015]",
+          siteWatermarkClass,
+          "hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--foreground)_18%,transparent)]",
+        )}
         aria-hidden
       >
-        <div className="absolute top-1/2 left-1/2 size-[min(100vw,40rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/[0.1] blur-[130px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,transparent_10%,color-mix(in_oklch,var(--background)_75%,transparent)_80%)]" />
+        JEENL
+        <span
+          className={cn(
+            siteWatermarkAccentClass,
+            "transition-[-webkit-text-stroke-color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            "group-hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--brand)_85%,white)]",
+          )}
+        >
+          A
+        </span>
+        BS
       </div>
 
-      <div className="relative z-10 w-full overflow-hidden border-b border-border/40 bg-background/35 py-2.5 backdrop-blur-md sm:py-3.5">
+      <div className="relative z-10 w-full overflow-hidden border-y border-border/50 bg-background/40 py-2.5 backdrop-blur-sm sm:py-3.5">
         <div
           className={cn(
             "flex w-max font-mono text-[0.6rem] font-bold tracking-[0.28em] text-muted-foreground uppercase sm:text-[0.625rem] sm:tracking-[0.35em] sm:text-xs",
@@ -166,33 +181,20 @@ export function CinematicFooter() {
           "relative z-10 mx-auto w-full max-w-7xl",
           sitePaddingX,
           siteSectionYClass,
-          "pb-10 sm:pb-14 md:pb-16",
+          "pb-28 sm:pb-32 md:pb-40 lg:pb-48",
         )}
       >
         <div
-          ref={giantTextRef}
-          className={cn(
-            "pointer-events-none absolute inset-x-0 bottom-0 z-0 flex justify-center overflow-hidden opacity-40 select-none",
-            siteWatermarkClass,
-          )}
-          aria-hidden
-        >
-          <span className="translate-y-1/4 whitespace-nowrap sm:translate-y-1/5">
-            JEENL<span className={siteWatermarkAccentClass}>A</span>BS
-          </span>
-        </div>
-
-        <div
           ref={contentRef}
-          className="relative z-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
+          className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-stretch gap-5 text-left sm:items-center sm:gap-6 sm:text-center"
         >
-          <div className="flex max-w-xl flex-col gap-4 sm:gap-5">
+          <div className="flex flex-col gap-4 sm:items-center sm:gap-5">
             <p className={siteEyebrowClass}>Contact</p>
             <h2 id="contact-heading" className={siteSectionTitleClass}>
               Ready to{" "}
               <span className={siteTitleAccentClass}>build?</span>
             </h2>
-            <p className={siteSectionDescriptionClass}>
+            <p className={cn(siteSectionDescriptionClass, "sm:mx-auto")}>
               Tell us about the product, automation, or software you need — we
               reply from{" "}
               <a
@@ -203,28 +205,16 @@ export function CinematicFooter() {
               </a>
               .
             </p>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className={cn(
-                sitePillLinkClass,
-                "mt-1 w-fit border-brand/30 bg-brand/10 text-brand-accessible hover:border-brand/50 hover:text-brand",
-              )}
-            >
-              Email directly
-            </a>
           </div>
 
-          <div className="w-full min-w-0 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:rounded-[1.75rem] sm:p-1.5">
-            <div className="rounded-[calc(1.25rem-0.25rem)] border border-white/5 bg-background/50 p-4 sm:rounded-[calc(1.75rem-0.375rem)] sm:p-5 md:p-6">
-              <ContactForm variant="footer" className="w-full text-left" />
-            </div>
-          </div>
+          <ContactForm variant="footer" className="w-full text-left" />
         </div>
       </div>
 
+      {/* Transparent legal bar so the watermark stays visible underneath */}
       <div
         className={cn(
-          "relative z-20 flex w-full flex-col gap-4 border-t border-border/30 bg-background/40 py-5 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-6",
+          "relative z-20 flex w-full flex-col gap-4 border-t border-border/20 bg-transparent py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-8 sm:pt-5",
           navBarPaddingX,
           "pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]",
         )}

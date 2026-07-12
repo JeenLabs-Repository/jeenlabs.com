@@ -97,7 +97,7 @@ export const siteFooterMetaClass =
   "font-mono text-[0.6rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase sm:text-[0.625rem] sm:tracking-[0.2em] sm:text-xs";
 
 export const siteWatermarkClass = cn(
-  "font-brand text-[clamp(2.5rem,16vw,12rem)] leading-[0.75] font-black tracking-[-0.04em]",
+  "font-brand text-[clamp(3rem,19vw,15rem)] leading-[0.75] font-black tracking-[-0.04em]",
   "text-transparent max-w-[96vw]",
   "[-webkit-text-stroke:1px_color-mix(in_oklch,var(--foreground)_5%,transparent)]",
   "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--foreground)_10%,transparent)_0%,transparent_60%)]",
