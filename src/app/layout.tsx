@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter, Jost } from "next/font/google";
 
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { CookieConsentBanner } from "@/components/consent/cookie-consent-banner";
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -73,10 +74,14 @@ export default function RootLayout({
         <GoogleAnalytics />
         <Providers>
           <Navbar />
-          <main id="main-content" className="overflow-x-hidden w-full max-w-full">
+          <main
+            id="main-content"
+            className="overflow-x-hidden w-full max-w-full"
+          >
             {children}
           </main>
         </Providers>
+        <CookieConsentBanner />
       </body>
     </html>
   );
