@@ -1,6 +1,7 @@
 "use client";
 
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 import { SectionHeader } from "@/components/section-header";
@@ -69,12 +70,25 @@ function StatItem({
   }, [value, index, prefersReducedMotion]);
 
   return (
-    <div ref={nodeRef} className="text-center">
-      <p className="font-brand text-[clamp(2.5rem,8vw,4.5rem)] leading-none font-black tracking-tighter text-foreground">
+    <div
+      ref={nodeRef}
+      className={cn(
+        "flex flex-col gap-2 border-t border-border/40 pt-5 sm:gap-3 sm:pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-6 lg:pl-8",
+        index === 0 && "md:border-l-0 md:pl-0",
+      )}
+    >
+      <p
+        className={cn(
+          "font-mono text-[clamp(2rem,9vw,4.75rem)] leading-none font-medium tracking-[-0.04em] tabular-nums text-foreground",
+          index === 0 && "text-brand-accessible",
+        )}
+      >
         {display}
-        {suffix}
+        <span className="text-[0.55em] tracking-normal text-brand/80">
+          {suffix}
+        </span>
       </p>
-      <p className={siteStatLabelClass}>{label}</p>
+      <p className={cn(siteStatLabelClass, "mt-0 max-w-[14ch]")}>{label}</p>
     </div>
   );
 }
@@ -82,6 +96,7 @@ function StatItem({
 export function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -110,6 +125,25 @@ export function StatsSection() {
             },
           },
         );
+
+        if (gridRef.current) {
+          gsap.fromTo(
+            gridRef.current.children,
+            { y: 28, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.75,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: gridRef.current,
+                start: "top 88%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        }
       }, sectionRef);
 
       cleanup = () => ctx.revert();
@@ -122,17 +156,23 @@ export function StatsSection() {
   }, [prefersReducedMotion]);
 
   return (
-    <SectionShell id="stats" sectionRef={sectionRef}>
-      <div ref={headerRef} className="mb-10 sm:mb-14">
+    <SectionShell id="stats" sectionRef={sectionRef} tone="ink" className="border-y border-border/30">
+      <div
+        ref={headerRef}
+        className="mb-8 grid grid-cols-1 items-end gap-6 sm:mb-10 md:mb-12 lg:mb-16 lg:grid-cols-[1fr_0.85fr] lg:gap-8"
+      >
         <SectionHeader
           eyebrow="Stats"
           title="By the"
           titleAccent="numbers"
-          description="A snapshot of the results we've helped teams achieve so far."
+          description="Delivery counts from engagements so far — not marketing placeholders."
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
+      <div
+        ref={gridRef}
+        className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 md:gap-0"
+      >
         {STATS.map((stat, index) => (
           <StatItem
             key={stat.label}

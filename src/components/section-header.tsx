@@ -29,7 +29,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "flex max-w-3xl flex-col gap-4 sm:gap-5",
+        "flex max-w-3xl flex-col gap-3 sm:gap-4 md:gap-5",
         centered && "mx-auto items-center text-center",
         className,
       )}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { RingCtaButton } from "@/components/ring-cta-button";
+import { CONTACT_EMAIL } from "@/lib/contact-content";
 import {
   getOtherServices,
   serviceHref,
@@ -15,22 +16,24 @@ import { runGsap } from "@/lib/run-gsap";
 import { goToSection } from "@/lib/scroll";
 import {
   siteEyebrowClass,
+  siteFocusRingClass,
   siteHeaderOffsetClass,
   siteMonoChipClass,
   sitePaddingX,
   sitePillLinkClass,
   siteSectionDescriptionClass,
   siteSectionTitleClass,
+  siteSectionYClass,
   siteTitleAccentClass,
 } from "@/lib/site-layout";
 
 function OfferingCard({ offering }: { offering: ServiceContent["offerings"][number] }) {
   return (
-    <article className="rounded-2xl border border-border/40 bg-background/25 p-5 backdrop-blur-sm md:p-6">
+    <article className="rounded-2xl border border-border/40 bg-background/20 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] md:p-6">
       <h3 className="text-lg font-bold tracking-tight text-foreground uppercase sm:text-xl">
         {offering.title}
       </h3>
-      <p className="mt-2 text-sm text-muted-foreground">{offering.intro}</p>
+      <p className="mt-2 text-sm text-muted-foreground text-pretty">{offering.intro}</p>
       <ul className="mt-4 space-y-2">
         {offering.items.map((item) => (
           <li
@@ -145,28 +148,42 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full overflow-hidden pb-16 sm:pb-20"
+      className={cn(
+        "relative isolate w-full overflow-hidden",
+        "bg-[color-mix(in_oklch,var(--background)_88%,var(--foreground)_3%)]",
+      )}
       aria-labelledby={`service-${service.slug}-heading`}
     >
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
+        <div className="absolute -top-24 right-[-8%] size-[min(60vw,26rem)] rounded-full bg-brand/[0.07] blur-[100px]" />
+      </div>
       <div
         className={cn(
           "relative z-10 mx-auto flex w-full max-w-7xl flex-col",
           sitePaddingX,
           siteHeaderOffsetClass,
+          siteSectionYClass,
+          "pt-6 sm:pt-8",
         )}
       >
         <div
           ref={heroRef}
           className={cn(
-            "flex flex-col gap-5 pb-8 pt-3 sm:gap-6 sm:pb-10 sm:pt-4",
+            "flex flex-col gap-4 pb-8 sm:gap-5 sm:pb-10 md:gap-6",
             !prefersReducedMotion && "opacity-0",
           )}
         >
           <Link
             href="/#services"
-            className="inline-flex w-fit font-mono text-[0.625rem] font-bold tracking-[0.25em] text-muted-foreground uppercase transition-colors hover:text-brand sm:text-xs"
+            className={cn(
+              "inline-flex w-fit rounded-sm font-mono text-[0.625rem] font-bold tracking-[0.25em] text-muted-foreground uppercase transition-colors hover:text-brand sm:text-xs",
+              siteFocusRingClass,
+            )}
           >
-            ← All services
+            All services
           </Link>
 
           <div className="flex max-w-3xl flex-col gap-4 sm:gap-5">
@@ -197,7 +214,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         <div
           ref={mainRef}
           className={cn(
-            "grid grid-cols-1 gap-8 border-t border-border/40 py-8 lg:grid-cols-2 lg:gap-10 lg:py-10",
+            "grid grid-cols-1 gap-8 border-t border-border/40 py-8 sm:gap-9 sm:py-9 lg:grid-cols-2 lg:gap-10 lg:py-12",
             !prefersReducedMotion && "opacity-0",
           )}
         >
@@ -267,7 +284,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               {service.technologies.map((group) => (
                 <div
                   key={group.title}
-                  className="rounded-2xl border border-border/40 bg-background/25 p-5 text-center backdrop-blur-sm"
+                  className="rounded-2xl border border-border/40 bg-background/20 p-5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                 >
                   <h3 className="text-sm font-bold tracking-tight text-foreground uppercase">
                     {group.title}
@@ -292,8 +309,21 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <h2 className="text-2xl font-black tracking-tight text-foreground uppercase sm:text-3xl">
               {service.ctaTitle}
             </h2>
-            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base">
               {service.ctaDescription}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Prefer email?{" "}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className={cn(
+                  "font-medium text-brand-accessible underline underline-offset-4",
+                  siteFocusRingClass,
+                  "rounded-sm",
+                )}
+              >
+                {CONTACT_EMAIL}
+              </a>
             </p>
             <RingCtaButton
               aria-label={`Get started with ${service.title}`}

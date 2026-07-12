@@ -58,15 +58,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} ${jost.variable} dark min-h-dvh antialiased font-sans`}
     >
       <body className="min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
+        <a
+          href="#main-content"
+          className="bg-background text-foreground focus:ring-brand sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[1100] focus:rounded-full focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
+        >
+          Skip to content
+        </a>
         <JsonLd data={homeJsonLd()} />
         <GoogleAnalytics />
         <Providers>
           <Navbar />
-          <main>{children}</main>
+          <main id="main-content" className="overflow-x-hidden w-full max-w-full">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

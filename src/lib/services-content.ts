@@ -51,15 +51,15 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
     title: "Website",
     headline: "Web development",
     heroSubtitle:
-      "Create a stunning online presence with comprehensive web development solutions tailored to your business needs.",
+      "Marketing sites, product surfaces, and content systems built for clarity, speed, and conversion.",
     description:
-      "Responsive, user-friendly websites that help businesses establish a strong online presence and connect with their audience.",
-    whyTitle: "Why choose our web development services?",
+      "Responsive websites and web apps that make the product easy to understand and easy to buy.",
+    whyTitle: "Why work with us on the web",
     whySummary:
-      "At JeenLabs, we create websites that not only look stunning but also deliver results. Our web development team combines technical expertise with creative design to build websites that engage visitors, drive conversions, and grow your business.",
-    processTitle: "Our development process",
+      "We design and ship sites that look sharp and behave under load — clear IA, measured performance, and CMS or app wiring that your team can own.",
+    processTitle: "How we build",
     processIntro:
-      "We follow a comprehensive development process to ensure your website meets your business objectives:",
+      "A tight loop from discovery to launch so the site matches the business goal:",
     processSteps: [
       {
         title: "Discovery",
@@ -128,7 +128,7 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     technologiesIntro:
-      "We leverage the latest web technologies to build fast, secure, and scalable websites and applications.",
+      "Stacks we use when they fit the problem — not a fixed menu.",
     technologies: [
       {
         title: "Frontend",
@@ -147,9 +147,9 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
         items: "WordPress, Shopify, Magento, Drupal, Contentful, Strapi",
       },
     ],
-    ctaTitle: "Ready to build your dream website?",
+    ctaTitle: "Need a site that ships?",
     ctaDescription:
-      "Contact us today to discuss your web development project and how we can help you create a stunning online presence.",
+      "Share the audience, the offer, and the deadline — we will reply with a clear next step.",
     tags: ["Next.js", "Design systems", "Performance"],
   },
   "software-development": {
@@ -158,15 +158,15 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
     title: "Software",
     headline: "Software development",
     heroSubtitle:
-      "Power your business with custom software solutions designed to address your specific challenges and drive growth.",
+      "Custom tools, APIs, and internal products shaped around the workflow you already run.",
     description:
-      "Custom solutions designed to address specific challenges, improve efficiency, and drive growth through innovative technology.",
-    whyTitle: "Why choose our software development services?",
+      "Software scoped to a real bottleneck — built to integrate, operate, and grow with the team.",
+    whyTitle: "Why build custom software with us",
     whySummary:
-      "At JeenLabs, we develop custom software solutions that help businesses streamline operations, improve efficiency, and gain a competitive edge. Our team of experienced developers combines technical expertise with business acumen to deliver software that meets your specific needs.",
-    processTitle: "Our development methodology",
+      "We turn fuzzy requirements into typed systems: clear architecture, short demos, and code your team can maintain after handoff.",
+    processTitle: "How we deliver",
     processIntro:
-      "We follow an agile development methodology that ensures transparency, flexibility, and quality throughout the development process:",
+      "An iterative path that keeps the critical path visible:",
     processSteps: [
       {
         title: "Requirements analysis",
@@ -246,7 +246,7 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     technologiesIntro:
-      "We leverage a wide range of technologies to build robust, scalable, and secure software solutions.",
+      "We pick languages and platforms to match the operational constraint.",
     technologies: [
       {
         title: "Languages",
@@ -265,9 +265,9 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
         items: "AWS, Azure, Google Cloud, Docker, Kubernetes, Serverless",
       },
     ],
-    ctaTitle: "Ready to transform your business with custom software?",
+    ctaTitle: "Have a workflow that needs software?",
     ctaDescription:
-      "Contact us today to discuss your software development needs and how we can help you build a solution that drives your business forward.",
+      "Describe the users, the pain, and what already exists — we will outline a build path.",
     tags: ["Full-stack", "APIs", "Cloud"],
   },
   automation: {
@@ -276,15 +276,15 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
     title: "Automation",
     headline: "Automation",
     heroSubtitle:
-      "Streamline your business processes, reduce manual work, and increase productivity with comprehensive automation solutions.",
+      "Replace fragile manual steps with pipelines your team can trust every day.",
     description:
-      "Custom automation that streamlines repetitive tasks, reduces human error, and increases productivity.",
-    whyTitle: "Why choose our automation services?",
+      "Automation that cuts busywork, reduces error, and leaves humans on judgment calls.",
+    whyTitle: "Why automate with JeenLabs",
     whySummary:
-      "At JeenLabs, we specialize in creating custom automation solutions that transform manual, time-consuming processes into efficient, error-free workflows. Our automation experts analyze your business needs and develop tailored solutions that deliver measurable results.",
-    processTitle: "Our approach",
+      "We map the real process first, then automate the repeatable parts — with logging, retries, and handoffs your operators understand.",
+    processTitle: "How we approach it",
     processIntro:
-      "We follow a systematic approach to automation that ensures optimal results:",
+      "A practical sequence from audit to handoff:",
     processSteps: [
       {
         title: "Analysis",
@@ -347,9 +347,9 @@ export const SERVICES_CONTENT: Record<ServiceSlug, ServiceContent> = {
         ],
       },
     ],
-    ctaTitle: "Ready to automate your business?",
+    ctaTitle: "Ready to cut the busywork?",
     ctaDescription:
-      "Contact us today to discuss how our automation solutions can help your business save time, reduce costs, and improve efficiency.",
+      "Tell us which process burns the most time — we will propose what to automate first.",
     tags: ["Integrations", "Pipelines", "AI-assisted"],
   },
 };

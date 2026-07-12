@@ -1,36 +1,36 @@
 export const ABOUT_MISSION = {
   title: "Our mission",
   paragraphs: [
-    "At JeenLabs, our mission is to unlock the possibilities of tomorrow by delivering cutting-edge automation and development solutions that empower businesses to thrive in the digital landscape.",
-    "We combine technical expertise with a deep understanding of business needs to create solutions that drive real value and growth for our clients.",
+    "JeenLabs builds automation, web products, and custom software for teams that need reliable delivery without agency theater.",
+    "We start from the business constraint, choose the smallest sharp stack, and ship systems people actually run in production.",
   ],
   highlights: [
-    "Innovative solutions for complex challenges",
-    "Client-focused approach to every project",
-    "Commitment to quality and excellence",
+    "Automation that removes busywork, not judgment",
+    "Web products with clear UX and durable architecture",
+    "Custom software scoped to the real problem",
   ],
 } as const;
 
 export const ABOUT_VALUES = [
   {
-    title: "Innovation",
+    title: "Craft",
     description:
-      "We embrace the latest technologies and methodologies to deliver innovative solutions that give our clients a competitive edge.",
+      "Interfaces and systems should feel deliberate — typed, tested, and calm under change.",
   },
   {
-    title: "Collaboration",
+    title: "Clarity",
     description:
-      "We work closely with our clients, fostering partnerships based on trust, transparency, and mutual respect.",
+      "We write specs people can argue with, estimate honestly, and demos that show working paths.",
   },
   {
-    title: "Quality",
+    title: "Pace",
     description:
-      "We are committed to delivering solutions of the highest quality, with attention to detail and a focus on excellence.",
+      "Short loops, visible progress, and decisions that keep the critical path moving.",
   },
   {
-    title: "Growth",
+    title: "Fit",
     description:
-      "We are dedicated to continuous learning and improvement, staying at the forefront of technology to drive growth for our clients.",
+      "Freelance and per-project by design: right specialists, low overhead, no unused retainers.",
   },
 ] as const;
 
@@ -44,9 +44,9 @@ export const STATS = [
 export const TEAM = {
   title: "How we work",
   paragraphs: [
-    "JeenLabs operates on a freelance and per-project basis, bringing together the right talent for each engagement. Our founder has 3 years of dedicated freelancing experience combined with 3 years of industry experience.",
-    "We've built a diverse network of talented students and experienced professionals who collaborate to deliver exceptional results. This flexible structure lets us assemble the right specialists for each job without unnecessary overhead.",
-    "Whether you need automation, web development, or custom software, we bring together the right skills, communicate clearly, and ship high-quality work.",
+    "JeenLabs runs freelance and per-project. We assemble the right mix of specialists for each engagement instead of staffing a fixed bench.",
+    "The founder brings three years of dedicated freelancing and three years of industry work — enough range to lead delivery and still stay close to the code.",
+    "Whether you need automation, a web product, or custom software, we keep communication tight and ship work you can operate.",
   ],
 } as const;
 
@@ -121,8 +121,3 @@ export const WORK_ITEMS = [
       "Custom CRM tied into existing tools, improving sales team efficiency by 65%.",
   },
 ] as const;
-
-export const CTA = {
-  description:
-    "Partner with JeenLabs to unlock the full potential of your business through innovative automation and development solutions. Let's build the future together.",
-} as const;

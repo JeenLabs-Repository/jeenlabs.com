@@ -1,6 +1,7 @@
 "use client";
 
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
 import { RingCtaButton } from "@/components/ring-cta-button";
@@ -9,7 +10,7 @@ import { SectionShell } from "@/components/section-shell";
 import { runGsap } from "@/lib/run-gsap";
 import { goToSection } from "@/lib/scroll";
 import { TEAM } from "@/lib/sections-content";
-import { siteFormPanelClass, siteSectionBrandRuleClass } from "@/lib/site-layout";
+import { siteSectionBrandRuleClass } from "@/lib/site-layout";
 
 export function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -58,40 +59,54 @@ export function TeamSection() {
       id="team"
       ariaLabelledBy="team-heading"
       sectionRef={sectionRef}
+      tone="studio"
       className={siteSectionBrandRuleClass}
     >
-      <div className="mb-10 sm:mb-12">
-        <SectionHeader
-          eyebrow="Team"
-          title="How we"
-          titleAccent="work"
-          description="A flexible crew assembled around what your project actually needs."
-          headingId="team-heading"
-        />
-      </div>
-
-      <article
+      <div
         ref={contentRef}
-        className={`${siteFormPanelClass} mx-auto flex max-w-3xl flex-col gap-5`}
+        className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:gap-20"
       >
-        <h3 className="text-xl font-bold tracking-tight text-foreground uppercase sm:text-2xl">
-          {TEAM.title}
-        </h3>
-        {TEAM.paragraphs.map((paragraph) => (
-          <p
-            key={paragraph}
-            className="text-sm leading-relaxed text-muted-foreground sm:text-base"
-          >
-            {paragraph}
-          </p>
-        ))}
-        <RingCtaButton
-          label="Get in touch"
-          aria-label="Get in touch"
-          onClick={() => goToSection("contact")}
-          className="mt-2"
-        />
-      </article>
+        <div className="lg:sticky lg:top-[calc(var(--spacing-site-header)+1rem)]">
+          <SectionHeader
+            eyebrow="Team"
+            title="How we"
+            titleAccent="work"
+            description="A flexible crew assembled around what your project actually needs."
+            headingId="team-heading"
+          />
+          <div className="mt-8 hidden lg:block">
+            <RingCtaButton
+              label="Get in touch"
+              aria-label="Get in touch"
+              onClick={() => goToSection("contact")}
+            />
+          </div>
+        </div>
+
+        <article className="flex flex-col gap-6 border-t border-border/40 pt-8">
+          <h3 className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold tracking-[-0.02em] text-foreground uppercase">
+            {TEAM.title}
+          </h3>
+          {TEAM.paragraphs.map((paragraph, index) => (
+            <p
+              key={paragraph}
+              className={cn(
+                "max-w-[58ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base sm:leading-relaxed",
+                index === 0 && "text-foreground/90",
+              )}
+            >
+              {paragraph}
+            </p>
+          ))}
+          <div className="mt-2 lg:hidden">
+            <RingCtaButton
+              label="Get in touch"
+              aria-label="Get in touch"
+              onClick={() => goToSection("contact")}
+            />
+          </div>
+        </article>
+      </div>
     </SectionShell>
   );
 }

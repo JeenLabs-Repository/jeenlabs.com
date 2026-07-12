@@ -14,7 +14,7 @@ import {
 import { useNavbarScroll } from "@/hooks/use-navbar-scroll";
 import { getGsap } from "@/lib/gsap-lazy";
 import { goToHome, scrollToSection } from "@/lib/scroll";
-import { navBarPaddingX } from "@/lib/site-layout";
+import { navBarPaddingX, siteFocusRingClass } from "@/lib/site-layout";
 
 const NAV_ITEMS = [
   { label: "home", href: "/#home", ariaLabel: "Home" },
@@ -64,7 +64,10 @@ function NavMenuItem({
         href={item.href}
         prefetch={item.href === "/#home" ? false : undefined}
         aria-label={item.ariaLabel}
-        className="group flex touch-manipulation flex-row-reverse items-baseline gap-3 py-4 no-underline sm:gap-4 sm:py-5 md:py-7"
+        className={cn(
+          "group flex touch-manipulation flex-row-reverse items-baseline gap-3 rounded-sm py-4 no-underline sm:gap-4 sm:py-5 md:py-7",
+          siteFocusRingClass,
+        )}
         onClick={(event) => {
           if (item.href.startsWith("/#")) {
             const id = item.href.slice(2);
@@ -106,12 +109,14 @@ function NavMenuOverlay({
   showMenu,
   onClose,
   linkRefs,
+  menuButtonRef,
   onExitComplete,
 }: {
   isOpen: boolean;
   showMenu: boolean;
   onClose: () => void;
   linkRefs: MutableRefObject<HTMLAnchorElement[]>;
+  menuButtonRef: MutableRefObject<HTMLButtonElement | null>;
   onExitComplete: () => void;
 }) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -134,7 +139,11 @@ function NavMenuOverlay({
         gsap.set(panel, { y: 24 });
         gsap.set(links, { y: 48, autoAlpha: 0 });
         gsap
-          .timeline()
+          .timeline({
+            onComplete: () => {
+              links[0]?.focus();
+            },
+          })
           .to(overlay, { autoAlpha: 1, duration: 0.35, ease: "power2.out" })
           .to(panel, { y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2")
           .to(
@@ -159,6 +168,7 @@ function NavMenuOverlay({
           onComplete: () => {
             gsap.set(overlay, { display: "none" });
             onExitComplete();
+            menuButtonRef.current?.focus();
           },
         })
         .to(links, {
@@ -179,7 +189,39 @@ function NavMenuOverlay({
     return () => {
       cancelled = true;
     };
-  }, [isOpen, showMenu, linkRefs, onExitComplete]);
+  }, [isOpen, showMenu, linkRefs, menuButtonRef, onExitComplete]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+
+      const focusable = [
+        menuButtonRef.current,
+        ...linkRefs.current.filter(Boolean),
+      ].filter(
+        (el): el is HTMLAnchorElement | HTMLButtonElement => el != null,
+      );
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, linkRefs, menuButtonRef]);
 
   if (!showMenu) return null;
 
@@ -187,6 +229,9 @@ function NavMenuOverlay({
     <div
       ref={overlayRef}
       id="site-nav-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site navigation"
       className="fixed inset-0 z-[1000] hidden flex-col bg-background/90 backdrop-blur-xl"
       aria-hidden={!isOpen}
     >
@@ -222,6 +267,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const linkRefs = useRef<HTMLAnchorElement[]>([]);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const { isVisible, backgroundOpacity } = useNavbarScroll(isOpen || showMenu);
   const navChromeOpacity = isOpen ? 1 : backgroundOpacity;
@@ -254,7 +300,7 @@ export function Navbar() {
       <header
         className={cn(
           "pointer-events-none fixed inset-x-0 top-0 z-[1001] w-full",
-          "transition-transform duration-300 ease-out motion-reduce:transition-none",
+          "transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none",
           !isVisible && "-translate-y-full",
         )}
       >
@@ -274,7 +320,8 @@ export function Navbar() {
               href="/#home"
               prefetch={false}
               className={cn(
-                "inline-flex shrink-0 items-center text-foreground transition-opacity hover:opacity-90",
+                "inline-flex shrink-0 items-center rounded-sm text-foreground transition-opacity hover:opacity-90",
+                siteFocusRingClass,
                 !prefersReducedMotion &&
                   "motion-safe:animate-nav-chrome-enter nav-chrome-enter-delay-1",
               )}
@@ -293,9 +340,11 @@ export function Navbar() {
             </Link>
 
             <button
+              ref={menuButtonRef}
               type="button"
               className={cn(
-                "inline-flex size-10 shrink-0 cursor-pointer flex-col items-center justify-center gap-1.5 border-0 bg-transparent p-0 touch-manipulation sm:size-11",
+                "inline-flex size-10 shrink-0 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border-0 bg-transparent p-0 touch-manipulation sm:size-11",
+                siteFocusRingClass,
                 !prefersReducedMotion &&
                   "motion-safe:animate-nav-chrome-enter nav-chrome-enter-delay-2",
               )}
@@ -306,13 +355,13 @@ export function Navbar() {
             >
               <span
                 className={cn(
-                  "block h-0.5 w-5 rounded-full bg-brand transition-transform duration-300 ease-out sm:w-6",
+                  "block h-0.5 w-5 rounded-full bg-brand transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] sm:w-6",
                   isOpen && "translate-y-[4.5px] rotate-45",
                 )}
               />
               <span
                 className={cn(
-                  "block h-0.5 w-5 rounded-full bg-brand transition-transform duration-300 ease-out sm:w-6",
+                  "block h-0.5 w-5 rounded-full bg-brand transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] sm:w-6",
                   isOpen && "-translate-y-[4.5px] -rotate-45",
                 )}
               />
@@ -331,6 +380,7 @@ export function Navbar() {
         showMenu={showMenu}
         onClose={closeMenu}
         linkRefs={linkRefs}
+        menuButtonRef={menuButtonRef}
         onExitComplete={() => setShowMenu(false)}
       />
     </>

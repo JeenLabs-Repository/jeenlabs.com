@@ -3,7 +3,7 @@
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import { SectionHeader } from "@/components/section-header";
 import { SectionShell } from "@/components/section-shell";
@@ -15,14 +15,14 @@ import {
   serviceHref,
   type ServiceSlug,
 } from "@/lib/services-content";
-import { siteMonoChipClass } from "@/lib/site-layout";
+import { siteFocusRingClass, siteMonoChipClass } from "@/lib/site-layout";
 
 const SERVICE_ICONS: Record<ServiceSlug, ReactNode> = {
   "web-development": (
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      className="size-6 stroke-current"
+      className="size-5 stroke-current sm:size-6"
       aria-hidden
     >
       <rect x="3" y="4" width="18" height="14" rx="2" strokeWidth="1.5" />
@@ -35,7 +35,7 @@ const SERVICE_ICONS: Record<ServiceSlug, ReactNode> = {
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      className="size-6 stroke-current"
+      className="size-5 stroke-current sm:size-6"
       aria-hidden
     >
       <path
@@ -50,7 +50,7 @@ const SERVICE_ICONS: Record<ServiceSlug, ReactNode> = {
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      className="size-6 stroke-current"
+      className="size-5 stroke-current sm:size-6"
       aria-hidden
     >
       <path
@@ -72,64 +72,124 @@ const SERVICES = SERVICE_SLUGS.map((slug) => ({
   icon: SERVICE_ICONS[slug],
 }));
 
-function ServiceCard({
+function ServiceRow({
   service,
-  cardRef,
+  isActive,
+  onActivate,
+  rowRef,
 }: {
   service: (typeof SERVICES)[number];
-  cardRef: (el: HTMLAnchorElement | null) => void;
+  isActive: boolean;
+  onActivate: () => void;
+  rowRef: (el: HTMLAnchorElement | null) => void;
 }) {
   return (
     <Link
       href={serviceHref(service.slug)}
-      ref={cardRef}
+      ref={rowRef}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
       className={cn(
-        "group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-border/40 no-underline",
-        "bg-background/25 p-6 backdrop-blur-sm transition-[border-color,background-color,transform] duration-500",
-        "hover:border-brand/45 hover:bg-background/40 md:p-8",
-        "md:hover:-translate-y-1",
+        "group relative grid grid-cols-1 gap-3 border-t border-border/40 no-underline transition-[background-color] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:grid-cols-[4.5rem_minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[5.5rem_minmax(0,1fr)_auto] lg:gap-8",
+        "py-5 sm:py-6 md:py-7 lg:py-8",
+        isActive && "bg-foreground/[0.03]",
+        siteFocusRingClass,
+        "rounded-sm",
       )}
     >
       <div
-        className="pointer-events-none absolute -top-16 -right-16 size-40 rounded-full bg-brand/0 blur-3xl transition-[background-color] duration-500 group-hover:bg-brand/10"
+        className={cn(
+          "pointer-events-none absolute inset-y-0 left-0 w-px bg-brand/0 transition-[background-color,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+          isActive && "bg-brand scale-y-100",
+          !isActive && "scale-y-50",
+        )}
         aria-hidden
       />
 
-      <div className="relative flex items-start justify-between gap-4">
-        <span className="font-mono text-[0.65rem] font-bold tracking-[0.25em] text-brand/70 uppercase sm:text-xs">
-          {service.index}
-        </span>
-        <div className="text-muted-foreground transition-colors duration-500 group-hover:text-brand">
-          {service.icon}
+      <span
+        className={cn(
+          "font-mono text-[0.7rem] font-bold tracking-[0.28em] uppercase transition-colors duration-500 md:pt-1",
+          isActive ? "text-brand-accessible" : "text-muted-foreground/70",
+        )}
+      >
+        {service.index}
+      </span>
+
+      <div className="flex min-w-0 flex-col gap-3 md:gap-4">
+        <div className="flex items-start justify-between gap-4">
+          <h3
+            className={cn(
+              "text-[clamp(1.5rem,5.5vw,3.25rem)] leading-[0.95] font-black tracking-[-0.03em] text-foreground uppercase transition-colors duration-500",
+              isActive && "text-foreground",
+            )}
+          >
+            {service.title}
+          </h3>
+          <span
+            className={cn(
+              "mt-1 shrink-0 text-muted-foreground transition-[color,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden",
+              isActive && "text-brand",
+            )}
+          >
+            {service.icon}
+          </span>
+        </div>
+
+        <div
+          className={cn(
+            "grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            isActive
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[1fr] opacity-100 md:grid-rows-[0fr] md:opacity-0",
+          )}
+        >
+          <div className="overflow-hidden">
+            <p className="max-w-[48ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-[0.9375rem]">
+              {service.description}
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {service.tags.map((tag) => (
+                <li key={tag} className={siteMonoChipClass}>
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="relative flex flex-1 flex-col gap-3">
-        <h3 className="text-2xl font-black tracking-tight text-foreground uppercase sm:text-3xl">
-          {service.title}
-        </h3>
-        <p className="max-w-[32ch] text-sm leading-relaxed text-muted-foreground">
-          {service.description}
-        </p>
-      </div>
-
-      <ul className="relative flex flex-wrap gap-2">
-        {service.tags.map((tag) => (
-          <li
-            key={tag}
-            className={cn(
-              siteMonoChipClass,
-              "transition-colors duration-500 group-hover:border-border group-hover:text-foreground",
-            )}
+      <div className="hidden items-center gap-4 md:flex md:pt-2">
+        <span
+          className={cn(
+            "text-muted-foreground transition-colors duration-500",
+            isActive && "text-brand",
+          )}
+        >
+          {service.icon}
+        </span>
+        <span
+          className={cn(
+            "inline-flex size-10 items-center justify-center rounded-full border border-border/50 transition-[border-color,background-color,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            isActive
+              ? "translate-x-0 border-brand/50 bg-brand text-white"
+              : "translate-x-0 border-border/40 bg-transparent text-muted-foreground group-hover:border-brand/40",
+          )}
+          aria-hidden
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            className="size-4 stroke-current"
           >
-            {tag}
-          </li>
-        ))}
-      </ul>
-
-      <span className="relative font-mono text-[0.625rem] font-bold tracking-[0.2em] text-brand uppercase">
-        Learn more →
-      </span>
+            <path
+              d="M7 17L17 7M17 7H8M17 7V16"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
     </Link>
   );
 }
@@ -137,15 +197,16 @@ function ServiceCard({
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<HTMLAnchorElement[]>([]);
+  const listRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<HTMLAnchorElement[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (typeof window === "undefined" || !sectionRef.current) return;
     if (prefersReducedMotion) return;
 
-    const cards = cardRefs.current.filter(Boolean);
+    const rows = rowRefs.current.filter(Boolean);
     let cancelled = false;
     let cleanup: (() => void) | undefined;
 
@@ -170,16 +231,16 @@ export function ServicesSection() {
         );
 
         gsap.fromTo(
-          cards,
-          { y: 48, opacity: 0 },
+          rows,
+          { y: 36, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.85,
-            stagger: 0.14,
+            duration: 0.8,
+            stagger: 0.12,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: gridRef.current,
+              trigger: listRef.current,
               start: "top 82%",
               toggleActions: "play none none none",
             },
@@ -210,28 +271,32 @@ export function ServicesSection() {
       ariaLabelledBy="services-heading"
       sectionRef={sectionRef}
       tall
-      innerClassName="flex flex-col gap-12 md:gap-16"
+      tone="studio"
+      innerClassName="flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-16"
     >
-      <div ref={headerRef}>
+      <div ref={headerRef} className="md:max-w-2xl">
         <SectionHeader
           eyebrow="Services"
           title="What we"
           titleAccent="build"
-          description="JeenLabs delivers automation, web development, and software development to help businesses thrive in the digital landscape."
+          description="Automation, web products, and custom software — scoped to the constraint, shipped to production."
           headingId="services-heading"
         />
       </div>
 
       <div
-        ref={gridRef}
-        className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3 md:gap-6"
+        ref={listRef}
+        className="border-b border-border/40"
+        onMouseLeave={() => setActiveIndex(0)}
       >
         {SERVICES.map((service, index) => (
-          <ServiceCard
+          <ServiceRow
             key={service.slug}
             service={service}
-            cardRef={(el) => {
-              if (el) cardRefs.current[index] = el;
+            isActive={activeIndex === index}
+            onActivate={() => setActiveIndex(index)}
+            rowRef={(el) => {
+              if (el) rowRefs.current[index] = el;
             }}
           />
         ))}

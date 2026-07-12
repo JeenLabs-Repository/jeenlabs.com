@@ -64,6 +64,8 @@
   --animate-hero-headline-enter: hero-headline-enter 1.15s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   --animate-hero-tagline-enter: hero-tagline-enter 0.85s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s both;
   --animate-hero-cta-enter: hero-cta-enter 0.75s cubic-bezier(0.215, 0.61, 0.355, 1) 0.95s both;
+  --animate-hero-scroll-cue: hero-scroll-cue 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 1.25s both;
+  --animate-hero-scroll-line: hero-scroll-line 1.8s cubic-bezier(0.32, 0.72, 0, 1) infinite;
   --animate-nav-chrome-enter: nav-chrome-enter 0.9s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
@@ -206,6 +208,26 @@
   }
 }
 
+@keyframes hero-scroll-cue {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-scroll-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
 @keyframes nav-chrome-enter {
   from {
     opacity: 0;
@@ -238,5 +260,17 @@
 }
 
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: var(--spacing-site-header);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-footer-marquee,
+  .animate-hero-scroll-line {
+    animation: none !important;
+  }
 }

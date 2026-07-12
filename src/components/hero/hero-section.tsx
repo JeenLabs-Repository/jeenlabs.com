@@ -9,8 +9,11 @@ import { RingCtaButton } from "@/components/ring-cta-button";
 import { goToSection } from "@/lib/scroll";
 import {
   siteBackgroundClass,
+  siteEyebrowClass,
+  siteFocusRingClass,
   siteHeaderOffsetClass,
   sitePaddingX,
+  sitePillLinkClass,
 } from "@/lib/site-layout";
 
 const AnimatedBackground = dynamic(
@@ -29,7 +32,7 @@ export function HeroSection() {
       id="home"
       aria-label="Introduction"
       className={cn(
-        "relative isolate w-full min-h-dvh overflow-hidden",
+        "relative isolate w-full min-h-[100dvh] overflow-hidden",
         siteBackgroundClass,
       )}
     >
@@ -45,33 +48,46 @@ export function HeroSection() {
       </DeferredAfterPaint>
 
       <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40 bg-gradient-to-t from-background via-background/70 to-transparent"
+        aria-hidden
+      />
+
+      <div
         className={cn(
-          "relative z-10 mx-auto flex min-h-dvh w-full max-w-7xl flex-col",
+          "relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col",
           sitePaddingX,
           siteHeaderOffsetClass,
           "pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]",
         )}
       >
         <div className="flex w-full flex-1 items-center">
-          <div className="flex max-w-4xl flex-col gap-6 sm:gap-8">
+          <div className="flex w-full max-w-6xl flex-col gap-5 sm:gap-7 md:gap-9">
+            <p
+              className={cn(
+                siteEyebrowClass,
+                !prefersReducedMotion &&
+                  "opacity-0 motion-safe:animate-hero-tagline-enter",
+              )}
+            >
+              JeenLabs · Software studio
+            </p>
             <h1
               className={cn(
-                "font-sans text-[clamp(2.375rem,10.5vw,3.5rem)] leading-[0.92] font-black tracking-tighter text-foreground uppercase sm:text-[clamp(2.75rem,8.5vw,4.75rem)] md:text-[clamp(3.25rem,7vw,6rem)] lg:text-[clamp(3.75rem,5.5vw,7.5rem)] lg:leading-[0.9]",
-                "-mt-[min(2.5rem,calc(var(--spacing-site-header)*0.5))]",
+                "max-w-6xl font-sans text-[clamp(2.125rem,9vw,5.75rem)] leading-[0.94] font-black tracking-[-0.03em] text-foreground uppercase text-balance",
                 !prefersReducedMotion &&
                   "motion-safe:md:animate-hero-headline-enter",
               )}
             >
-              Build <br />
-              products <br />
-              <span className="text-transparent [-webkit-text-stroke:1px_color-mix(in_oklab,var(--brand)_85%,white)]">
+              Build products{" "}
+              <span className="text-transparent [-webkit-text-stroke:1.25px_color-mix(in_oklab,var(--brand)_88%,white)]">
                 with craft
               </span>
             </h1>
             <p
               className={cn(
-                "max-w-[34ch] text-sm leading-relaxed tracking-wide text-muted-foreground sm:max-w-sm md:font-mono md:text-[0.6875rem] md:leading-relaxed md:tracking-[0.3em] md:uppercase lg:tracking-[0.35em]",
-                !prefersReducedMotion && "opacity-0 motion-safe:animate-hero-tagline-enter",
+                "max-w-[46ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base sm:leading-relaxed md:text-lg",
+                !prefersReducedMotion &&
+                  "opacity-0 motion-safe:animate-hero-tagline-enter",
               )}
             >
               We partner with teams to design and ship{" "}
@@ -80,7 +96,9 @@ export function HeroSection() {
             </p>
             <div
               className={cn(
-                !prefersReducedMotion && "opacity-0 motion-safe:animate-hero-cta-enter",
+                "flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6",
+                !prefersReducedMotion &&
+                  "opacity-0 motion-safe:animate-hero-cta-enter",
               )}
             >
               <RingCtaButton
@@ -88,8 +106,45 @@ export function HeroSection() {
                 aria-label="Get started — contact us"
                 onClick={() => goToSection("contact")}
               />
+              <button
+                type="button"
+                className={cn(
+                  sitePillLinkClass,
+                  "border-border/40 bg-transparent px-5",
+                )}
+                onClick={() => goToSection("services")}
+              >
+                View services
+              </button>
             </div>
           </div>
+        </div>
+
+        <div className="flex justify-start pb-6 sm:pb-8">
+          <button
+            type="button"
+            onClick={() => goToSection("services")}
+            className={cn(
+              "group inline-flex items-center gap-3 rounded-sm font-mono text-[0.625rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:text-foreground",
+              siteFocusRingClass,
+              !prefersReducedMotion && "motion-safe:animate-hero-scroll-cue",
+            )}
+            aria-label="Scroll to services"
+          >
+            <span
+              className="relative flex h-10 w-px overflow-hidden bg-border/60"
+              aria-hidden
+            >
+              <span
+                className={cn(
+                  "absolute inset-x-0 top-0 h-1/2 bg-brand",
+                  !prefersReducedMotion &&
+                    "motion-safe:animate-hero-scroll-line",
+                )}
+              />
+            </span>
+            Scroll
+          </button>
         </div>
       </div>
     </section>

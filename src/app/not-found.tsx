@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CONTACT_EMAIL } from "@/lib/contact-content";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { sitePaddingX, sitePillLinkClass } from "@/lib/site-layout";
 
@@ -13,20 +14,32 @@ export const metadata = createPageMetadata({
 export default function NotFound() {
   return (
     <div
-      className={`flex min-h-[60dvh] flex-col items-start justify-center gap-6 py-24 ${sitePaddingX}`}
+      className={`flex min-h-[70dvh] flex-col items-start justify-center gap-6 py-24 ${sitePaddingX}`}
     >
       <p className="font-mono text-[0.625rem] font-bold tracking-[0.35em] text-brand uppercase">
         404
       </p>
-      <h1 className="text-3xl font-black tracking-tight text-foreground uppercase sm:text-4xl">
+      <h1 className="text-3xl font-black tracking-tight text-foreground uppercase text-balance sm:text-4xl">
         Page not found
       </h1>
-      <p className="max-w-md text-sm text-muted-foreground sm:text-base">
-        The page you are looking for does not exist or may have moved.
+      <p className="max-w-[42ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base">
+        That URL is missing or moved. Head home, or email{" "}
+        <a
+          href={`mailto:${CONTACT_EMAIL}`}
+          className="text-brand-accessible underline underline-offset-4"
+        >
+          {CONTACT_EMAIL}
+        </a>{" "}
+        if you expected something here.
       </p>
-      <Link href="/" className={sitePillLinkClass}>
-        Back to home
-      </Link>
+      <div className="flex flex-wrap gap-3">
+        <Link href="/" className={sitePillLinkClass}>
+          Back to home
+        </Link>
+        <Link href="/#contact" className={sitePillLinkClass}>
+          Contact
+        </Link>
+      </div>
     </div>
   );
 }
