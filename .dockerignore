@@ -1,0 +1,47 @@
+# Lean build context for Coolify / Docker (Next.js standalone image).
+
+# Dependencies & caches (installed inside the image)
+node_modules
+.pnpm-store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+.next
+out
+dist
+build
+coverage
+*.tsbuildinfo
+.vercel
+.turbo
+.swc
+.cache
+
+# Git / editors / agents
+.git
+.gitattributes
+.vscode
+.idea
+.cursor
+.agents
+.planning
+AGENTS.md
+CLAUDE.md
+
+# Env files — inject via Coolify; keep only the template in context if needed
+.env
+.env.*
+!.env.example
+
+# Logs & OS junk
+*.log
+.DS_Store
+Thumbs.db
+
+# Tests / tooling not needed at runtime
+**/*.test.*
+**/*.spec.*
+biome.json

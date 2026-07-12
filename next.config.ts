@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Required for the production Docker image (Next.js output file tracing).
+  // https://nextjs.org/docs/app/api-reference/config/next-config-js/output
+  output: "standalone",
   typedRoutes: true,
   experimental: {
     // Keep `three` out — optimizePackageImports can break WebGL namespace imports.
