@@ -23,3 +23,4 @@ Target WCAG AA. Forced dark theme. Respect `prefers-reduced-motion`. Visible foc
 3. Prefer spacing and type hierarchy over card chrome.
 4. Motion supports hierarchy (GSAP / Three), never noise.
 5. Real copy over agency filler; testimonials/work stay off until content is real.
+6. Mid-page chapters (process, capabilities, focus, FAQ) carry context; navbar/hero/footer stay stable.

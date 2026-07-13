@@ -1,28 +1,27 @@
 "use client";
 
-import { BrandLogo } from "@/components/brand/logo";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
-
+import { BrandLogo } from "@/components/brand/logo";
 import { ContactForm } from "@/components/footer/contact-form";
-import { registerGsapPlugins } from "@/lib/gsap-lazy";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { CONTACT_EMAIL } from "@/lib/contact-content";
+import { registerGsapPlugins } from "@/lib/gsap-lazy";
 import { runGsap } from "@/lib/run-gsap";
 import {
   navBarPaddingX,
   siteEyebrowClass,
   siteFocusRingClass,
+  siteFooterMetaClass,
   sitePaddingX,
   sitePillLinkClass,
   siteSectionDescriptionClass,
   siteSectionTitleClass,
+  siteSectionYClass,
   siteTitleAccentClass,
-  siteFooterMetaClass,
   siteWatermarkAccentClass,
   siteWatermarkClass,
-  siteSectionYClass,
 } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
 const MARQUEE_ITEMS = [
   "Automation",
@@ -139,29 +138,38 @@ export function CinematicFooter() {
         "bg-background/75",
       )}
     >
-      {/* Monorepo iconic watermark — same classes + bottom placement */}
+      {/* Iconic watermark — mobile lifted so ~65% of letters stay in view; desktop keeps deep bleed */}
       <div
-        ref={giantTextRef}
         className={cn(
-          "group absolute -bottom-[5vh] left-1/2 z-0 w-max -translate-x-1/2 text-center whitespace-nowrap select-none",
-          "cursor-default transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
-          "hover:scale-[1.015]",
-          siteWatermarkClass,
-          "hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--foreground)_18%,transparent)]",
+          "pointer-events-none absolute inset-x-0 z-0 flex justify-center overflow-visible",
+          // Mobile: rise into the transparent legal/padding zone (~65% glyph visibility).
+          // Desktop: keep the existing hang below the section edge.
+          "bottom-[5.25rem] sm:bottom-[5.75rem] md:-bottom-[5vh]",
         )}
         aria-hidden
       >
-        JEENL
-        <span
+        <div
+          ref={giantTextRef}
           className={cn(
-            siteWatermarkAccentClass,
-            "transition-[-webkit-text-stroke-color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
-            "group-hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--brand)_85%,white)]",
+            "group w-max origin-bottom text-center whitespace-nowrap select-none",
+            "cursor-default transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            "pointer-events-auto hover:scale-[1.015]",
+            siteWatermarkClass,
+            "hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--foreground)_18%,transparent)]",
           )}
         >
-          A
-        </span>
-        BS
+          JEENL
+          <span
+            className={cn(
+              siteWatermarkAccentClass,
+              "transition-[-webkit-text-stroke-color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
+              "group-hover:[-webkit-text-stroke:1px_color-mix(in_oklch,var(--brand)_85%,white)]",
+            )}
+          >
+            A
+          </span>
+          BS
+        </div>
       </div>
 
       <div className="relative z-10 w-full overflow-hidden border-y border-border/50 bg-background/40 py-2.5 backdrop-blur-sm sm:py-3.5">
@@ -181,7 +189,8 @@ export function CinematicFooter() {
           "relative z-10 mx-auto w-full max-w-7xl",
           sitePaddingX,
           siteSectionYClass,
-          "pb-28 sm:pb-32 md:pb-40 lg:pb-48",
+          // Room for the lifted wordmark behind the legal bar on phones.
+          "pb-40 sm:pb-44 md:pb-40 lg:pb-48",
         )}
       >
         <div
@@ -191,8 +200,7 @@ export function CinematicFooter() {
           <div className="flex flex-col gap-4 sm:items-center sm:gap-5">
             <p className={siteEyebrowClass}>Contact</p>
             <h2 id="contact-heading" className={siteSectionTitleClass}>
-              Ready to{" "}
-              <span className={siteTitleAccentClass}>build?</span>
+              Ready to <span className={siteTitleAccentClass}>build?</span>
             </h2>
             <p className={cn(siteSectionDescriptionClass, "sm:mx-auto")}>
               Tell us about the product, automation, or software you need — we
@@ -216,7 +224,8 @@ export function CinematicFooter() {
         className={cn(
           "relative z-20 flex w-full flex-col gap-4 border-t border-border/20 bg-transparent py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-8 sm:pt-5",
           navBarPaddingX,
-          "pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]",
+          // Extra bottom air on phones so the wordmark can sit behind without covering taps.
+          "min-h-[5.5rem] pb-[max(1.75rem,env(safe-area-inset-bottom,0px))] sm:min-h-0",
         )}
       >
         <div className="flex min-w-0 flex-col gap-2">
@@ -261,6 +270,7 @@ export function CinematicFooter() {
           onClick={scrollToTop}
           aria-label="Back to top"
         >
+          {/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative */}
           <svg
             className="size-5"
             fill="none"

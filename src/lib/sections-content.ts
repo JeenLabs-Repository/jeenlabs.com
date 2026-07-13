@@ -34,21 +34,148 @@ export const ABOUT_VALUES = [
   },
 ] as const;
 
+export const PROCESS_STEPS = [
+  {
+    index: "01",
+    title: "Brief",
+    description:
+      "Align on the constraint, users, and what “done” looks like. We cut scope that doesn’t move the outcome.",
+  },
+  {
+    index: "02",
+    title: "Shape",
+    description:
+      "Turn the brief into milestones, risks, and a stack you can operate — not a slide deck nobody owns.",
+  },
+  {
+    index: "03",
+    title: "Build",
+    description:
+      "Ship working slices on a weekly cadence. You see the product grow; surprises stay small.",
+  },
+  {
+    index: "04",
+    title: "Hand off",
+    description:
+      "Deploy, document, and leave your team with clear ownership — not a black box we alone can touch.",
+  },
+] as const;
+
+export const CAPABILITIES = [
+  {
+    index: "01",
+    title: "Product surfaces",
+    description:
+      "Marketing sites, dashboards, and app shells with performance and conversion in mind.",
+    items: ["Next.js", "React", "TypeScript", "Tailwind"],
+  },
+  {
+    index: "02",
+    title: "Systems & APIs",
+    description:
+      "Services, data models, and integrations that stay readable after the first release.",
+    items: ["Node.js", "Python", "PostgreSQL", "Redis"],
+  },
+  {
+    index: "03",
+    title: "Automation",
+    description:
+      "Workflows that replace spreadsheet glue — queues, webhooks, sync jobs, and guarded scrapers.",
+    items: ["APIs", "Queues", "Webhooks", "Scripts"],
+  },
+  {
+    index: "04",
+    title: "Delivery ops",
+    description:
+      "Containers, CI, and host setups so shipping is repeatable instead of a ceremony.",
+    items: ["Docker", "CI", "VPS / Coolify", "Observability"],
+  },
+] as const;
+
+export const FOCUS_AREAS = [
+  {
+    index: "01",
+    title: "Ops-heavy teams",
+    description:
+      "People buried in copy-paste and spreadsheet reconciliations. We automate the path of least regret.",
+  },
+  {
+    index: "02",
+    title: "Founders shipping V1",
+    description:
+      "A first production surface that looks intentional and won’t collapse under the next set of features.",
+  },
+  {
+    index: "03",
+    title: "Internal tools",
+    description:
+      "Admin portals and workflow apps that staff actually enjoy using — not a dumped CRUD form.",
+  },
+] as const;
+
 export const STATS = [
-  { value: 3, suffix: "+", label: "Clients served" },
-  { value: 21, suffix: "+", label: "Projects completed" },
-  { value: 50, suffix: "K+", label: "Lines of code written" },
-  { value: 98, suffix: "%", label: "Client satisfaction" },
+  { value: 3, suffix: "+", label: "Clients" },
+  { value: 21, suffix: "+", label: "Projects shipped" },
+  { value: 50, suffix: "K+", label: "Lines shipped" },
+  { value: 98, suffix: "%", label: "Satisfaction" },
 ] as const;
 
 export const TEAM = {
-  title: "How we work",
+  title: "A studio assembled per engagement",
   paragraphs: [
-    "JeenLabs runs freelance and per-project. We assemble the right mix of specialists for each engagement instead of staffing a fixed bench.",
+    "JeenLabs runs freelance and per-project. We assemble the right mix of specialists for each engagement instead of staffing a fixed bench you pay to idle.",
     "The founder brings three years of dedicated freelancing and three years of industry work — enough range to lead delivery and still stay close to the code.",
-    "Whether you need automation, a web product, or custom software, we keep communication tight and ship work you can operate.",
+    "Whether you need automation, a web product, or custom software, we keep communication tight and ship work you can operate day to day.",
+  ],
+  principles: [
+    {
+      title: "Direct access",
+      description:
+        "Talk to the people building it — no account-manager telephone game.",
+    },
+    {
+      title: "Visible progress",
+      description: "Weekly demos with working software, not status theatre.",
+    },
+    {
+      title: "Operable handoff",
+      description: "Docs, access, and ownership left clear when we step back.",
+    },
   ],
 } as const;
+
+export const FAQ_ITEMS = [
+  {
+    question: "How do engagements usually start?",
+    answer:
+      "A short discovery call, then a written brief with scope, timeline, and price. If it isn’t a fit, we say so early.",
+  },
+  {
+    question: "Fixed project or ongoing?",
+    answer:
+      "Both. Most work is milestone-priced. Some clients keep a light retainer for iteration after launch.",
+  },
+  {
+    question: "Who writes the code?",
+    answer:
+      "Specialists on the engagement — often the founder for architecture and critical paths, with trusted collaborators when the load warrants it.",
+  },
+  {
+    question: "Do you take over unfinished builds?",
+    answer:
+      "Yes, after a technical review. We’ll tell you what to keep, rewrite, or retire before more money burns.",
+  },
+  {
+    question: "Where are you based?",
+    answer:
+      "Remote-first with roots in India. We work across time zones with async updates and scheduled live sessions.",
+  },
+  {
+    question: "How fast can we start?",
+    answer:
+      "Often within one to two weeks of a signed brief, depending on current load. Urgent patches get a same-week triage.",
+  },
+] as const;
 
 export const TESTIMONIALS = [
   {

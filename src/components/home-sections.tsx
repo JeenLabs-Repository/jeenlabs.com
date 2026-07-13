@@ -8,6 +8,7 @@ export function HomeSections() {
     <>
       <LazySection
         id="services"
+        skeletonMinHeightClassName="min-h-[28rem] sm:min-h-[32rem] md:min-h-[36rem]"
         loader={() =>
           import("@/components/services/services-section").then((mod) => ({
             default: mod.ServicesSection,
@@ -15,7 +16,17 @@ export function HomeSections() {
         }
       />
       <LazySection
+        id="process"
+        skeletonMinHeightClassName="min-h-[24rem] sm:min-h-[26rem] md:min-h-[28rem]"
+        loader={() =>
+          import("@/components/process/process-section").then((mod) => ({
+            default: mod.ProcessSection,
+          }))
+        }
+      />
+      <LazySection
         id="about"
+        skeletonMinHeightClassName="min-h-[28rem] sm:min-h-[32rem] md:min-h-[36rem]"
         loader={() =>
           import("@/components/about/about-section").then((mod) => ({
             default: mod.AboutSection,
@@ -23,7 +34,19 @@ export function HomeSections() {
         }
       />
       <LazySection
+        id="capabilities"
+        skeletonMinHeightClassName="min-h-[28rem] sm:min-h-[32rem] md:min-h-[34rem]"
+        loader={() =>
+          import("@/components/capabilities/capabilities-section").then(
+            (mod) => ({
+              default: mod.CapabilitiesSection,
+            }),
+          )
+        }
+      />
+      <LazySection
         id="stats"
+        skeletonMinHeightClassName="min-h-[20rem] sm:min-h-[22rem] md:min-h-[24rem]"
         loader={() =>
           import("@/components/stats/stats-section").then((mod) => ({
             default: mod.StatsSection,
@@ -31,10 +54,29 @@ export function HomeSections() {
         }
       />
       <LazySection
+        id="focus"
+        skeletonMinHeightClassName="min-h-[26rem] sm:min-h-[28rem] md:min-h-[32rem]"
+        loader={() =>
+          import("@/components/focus/focus-section").then((mod) => ({
+            default: mod.FocusSection,
+          }))
+        }
+      />
+      <LazySection
         id="team"
+        skeletonMinHeightClassName="min-h-[28rem] sm:min-h-[30rem] md:min-h-[32rem]"
         loader={() =>
           import("@/components/team/team-section").then((mod) => ({
             default: mod.TeamSection,
+          }))
+        }
+      />
+      <LazySection
+        id="faq"
+        skeletonMinHeightClassName="min-h-[28rem] sm:min-h-[30rem] md:min-h-[32rem]"
+        loader={() =>
+          import("@/components/faq/faq-section").then((mod) => ({
+            default: mod.FaqSection,
           }))
         }
       />
@@ -62,6 +104,7 @@ export function HomeSections() {
       ) : null}
       <LazySection
         id="contact"
+        skeletonMinHeightClassName="min-h-[36rem] sm:min-h-[40rem] md:min-h-[44rem]"
         loader={() =>
           import("@/components/footer/cinematic-footer").then((mod) => ({
             default: mod.CinematicFooter,

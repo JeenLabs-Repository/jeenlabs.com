@@ -1,11 +1,10 @@
-import { cn } from "@/lib/utils";
 import type { ReactNode, RefObject } from "react";
-
 import {
   sitePaddingX,
   siteSectionYClass,
   siteSectionYTallClass,
 } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
 export type SectionTone = "plain" | "studio" | "ember" | "ink";
 
@@ -48,7 +47,10 @@ function SectionToneBackdrop({ tone }: { tone: SectionTone }) {
   if (tone === "plain") return null;
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden
+    >
       {tone === "studio" ? (
         <>
           <div className="absolute -top-24 right-[-10%] size-[min(70vw,28rem)] rounded-full bg-brand/[0.06] blur-[100px]" />
@@ -87,7 +89,7 @@ export function SectionShell({
       id={id}
       aria-labelledby={ariaLabelledBy}
       className={cn(
-        "relative isolate w-full overflow-hidden",
+        "relative isolate w-full overflow-x-hidden",
         tall ? siteSectionYTallClass : siteSectionYClass,
         TONE_CLASS[tone],
         className,

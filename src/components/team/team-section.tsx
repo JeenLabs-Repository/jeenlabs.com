@@ -1,16 +1,15 @@
 "use client";
 
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
-
 import { RingCtaButton } from "@/components/ring-cta-button";
 import { SectionHeader } from "@/components/section-header";
 import { SectionShell } from "@/components/section-shell";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { runGsap } from "@/lib/run-gsap";
 import { goToSection } from "@/lib/scroll";
 import { TEAM } from "@/lib/sections-content";
 import { siteSectionBrandRuleClass } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
 export function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -83,29 +82,54 @@ export function TeamSection() {
           </div>
         </div>
 
-        <article className="flex flex-col gap-6 border-t border-border/40 pt-8">
-          <h3 className="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold tracking-[-0.02em] text-foreground uppercase">
-            {TEAM.title}
-          </h3>
-          {TEAM.paragraphs.map((paragraph, index) => (
-            <p
-              key={paragraph}
-              className={cn(
-                "max-w-[58ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base sm:leading-relaxed",
-                index === 0 && "text-foreground/90",
-              )}
-            >
-              {paragraph}
-            </p>
-          ))}
-          <div className="mt-2 lg:hidden">
+        <div className="flex flex-col gap-8 sm:gap-10">
+          <article className="flex flex-col gap-5 border-t border-border/40 pt-7 sm:gap-6 sm:pt-8">
+            <h3 className="text-[clamp(1.25rem,3.5vw,1.75rem)] font-bold tracking-[-0.02em] text-foreground uppercase text-balance">
+              {TEAM.title}
+            </h3>
+            {TEAM.paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={cn(
+                  "max-w-[58ch] text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base sm:leading-relaxed",
+                  index === 0 && "text-foreground/90",
+                )}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </article>
+
+          <ul className="grid grid-cols-1 gap-0 border-t border-border/40 sm:grid-cols-3 sm:gap-0">
+            {TEAM.principles.map((principle, index) => (
+              <li
+                key={principle.title}
+                className={cn(
+                  "flex flex-col gap-2 border-b border-border/40 py-5 sm:border-b-0 sm:border-l sm:px-4 sm:py-6 sm:first:border-l-0 sm:first:pl-0 lg:px-5",
+                  index === 0 && "sm:pl-0",
+                )}
+              >
+                <span className="font-mono text-[0.6rem] font-bold tracking-[0.22em] text-brand-accessible uppercase">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h4 className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
+                  {principle.title}
+                </h4>
+                <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {principle.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="lg:hidden">
             <RingCtaButton
               label="Get in touch"
               aria-label="Get in touch"
               onClick={() => goToSection("contact")}
             />
           </div>
-        </article>
+        </div>
       </div>
     </SectionShell>
   );
