@@ -53,10 +53,8 @@
   /* mobile: default (<768px) · tablet: md · desktop: lg */
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
-  /*
-   * Fixed navbar: safe-area / top inset + toolbar row.
-   */
-  --spacing-site-header: calc(max(1rem, env(safe-area-inset-top, 0px)) + 4rem);
+  /* Fallback; responsive value set on :root. */
+  --spacing-site-header: calc(env(safe-area-inset-top, 0px) + 4rem);
   --animate-footer-breathe: footer-breathe 8s ease-in-out infinite alternate;
   --animate-footer-marquee: footer-marquee 40s linear infinite;
   --animate-hero-headline-enter: hero-headline-enter 1.15s
@@ -76,6 +74,11 @@
 }
 
 :root {
+  /*
+   * Fixed navbar: notch safe-area only + 4rem toolbar (h-16).
+   * Do not floor safe-area with 1rem — that mis-centers logo/burger on phones.
+   */
+  --spacing-site-header: calc(env(safe-area-inset-top, 0px) + 4rem);
   --brand: #dc2626;
   /* Slightly lighter brand for small text — meets 4.5:1 on dark backgrounds */
   --brand-accessible: color-mix(in oklch, var(--brand) 82%, white);

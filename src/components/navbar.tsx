@@ -309,7 +309,7 @@ export function Navbar() {
           style={{ opacity: navChromeOpacity }}
           aria-hidden
         />
-        <div className="relative pt-[max(1rem,env(safe-area-inset-top,0px))]">
+        <div className="relative pt-[env(safe-area-inset-top,0px)]">
           <div
             className={cn(
               "pointer-events-auto flex h-16 w-full items-center justify-between",
