@@ -74,9 +74,9 @@ export function CinematicFooter() {
       const ctx = gsap.context(() => {
         gsap.fromTo(
           giantTextRef.current,
-          { y: "10vh", scale: 0.8, opacity: 0 },
+          { y: 48, scale: 0.8, opacity: 0 },
           {
-            y: "0vh",
+            y: 0,
             scale: 1,
             opacity: 1,
             ease: "power1.out",

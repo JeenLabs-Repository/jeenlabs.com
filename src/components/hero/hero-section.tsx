@@ -1,11 +1,9 @@
 "use client";
 
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
-
 import { DeferredAfterPaint } from "@/components/deferred-after-paint";
 import { RingCtaButton } from "@/components/ring-cta-button";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { goToSection } from "@/lib/scroll";
 import {
   siteBackgroundClass,
@@ -15,6 +13,7 @@ import {
   sitePaddingX,
   sitePillLinkClass,
 } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
 const AnimatedBackground = dynamic(
   () =>
@@ -32,7 +31,7 @@ export function HeroSection() {
       id="home"
       aria-label="Introduction"
       className={cn(
-        "relative isolate w-full min-h-[100dvh] overflow-hidden",
+        "relative isolate w-full min-h-[100svh] overflow-hidden",
         siteBackgroundClass,
       )}
     >
@@ -54,7 +53,7 @@ export function HeroSection() {
 
       <div
         className={cn(
-          "relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col",
+          "relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col",
           sitePaddingX,
           siteHeaderOffsetClass,
           "pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]",

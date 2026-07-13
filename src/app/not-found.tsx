@@ -14,7 +14,7 @@ export const metadata = createPageMetadata({
 export default function NotFound() {
   return (
     <div
-      className={`flex min-h-[70dvh] flex-col items-start justify-center gap-6 py-24 ${sitePaddingX}`}
+      className={`flex min-h-[70svh] flex-col items-start justify-center gap-6 py-24 ${sitePaddingX}`}
     >
       <p className="font-mono text-[0.625rem] font-bold tracking-[0.35em] text-brand uppercase">
         404

@@ -61,9 +61,9 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${inter.variable} ${geistMono.variable} ${jost.variable} dark min-h-dvh antialiased font-sans`}
+      className={`${inter.variable} ${geistMono.variable} ${jost.variable} dark min-h-svh antialiased font-sans`}
     >
-      <body className="min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
+      <body className="min-h-svh overflow-x-hidden bg-background font-sans text-foreground">
         <a
           href="#main-content"
           className="bg-background text-foreground focus:ring-brand sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[1100] focus:rounded-full focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"

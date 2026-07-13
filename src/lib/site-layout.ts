@@ -25,7 +25,7 @@ export const siteSectionYClass =
   "py-14 sm:py-20 md:py-24 lg:py-28 xl:py-32 2xl:py-36";
 
 export const siteSectionYTallClass =
-  "py-14 sm:py-20 md:py-24 lg:py-32 xl:py-36 2xl:min-h-[100dvh] 2xl:py-40";
+  "py-14 sm:py-20 md:py-24 lg:py-32 xl:py-36 2xl:min-h-[100svh] 2xl:py-40";
 
 export const siteHeaderOffsetClass = "pt-[var(--spacing-site-header)]";
 

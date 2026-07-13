@@ -281,6 +281,17 @@ html {
   scroll-padding-top: var(--spacing-site-header);
 }
 
+/*
+ * Mobile browser chrome (URL / bottom bars) toggling must not resize layout.
+ * Prefer `svh` over `dvh` for full-viewport min-heights so content stays anchored
+ * while browser UI shows or hides during scroll.
+ */
+@supports (height: 100svh) {
+  :root {
+    --app-viewport-stable: 100svh;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
