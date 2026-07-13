@@ -2,7 +2,11 @@ import Link from "next/link";
 
 import { CONTACT_EMAIL } from "@/lib/contact-content";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { sitePaddingX, sitePillLinkClass } from "@/lib/site-layout";
+import {
+  siteInteriorPageYClass,
+  sitePaddingX,
+  sitePillLinkClass,
+} from "@/lib/site-layout";
 
 export const metadata = createPageMetadata({
   title: "Page not found",
@@ -14,7 +18,7 @@ export const metadata = createPageMetadata({
 export default function NotFound() {
   return (
     <div
-      className={`flex min-h-[70svh] flex-col items-start justify-center gap-6 py-24 ${sitePaddingX}`}
+      className={`mx-auto flex w-full max-w-3xl flex-col items-start justify-center gap-6 ${sitePaddingX} ${siteInteriorPageYClass} min-h-[70svh]`}
     >
       <p className="font-mono text-[0.625rem] font-bold tracking-[0.35em] text-brand uppercase">
         404

@@ -1,46 +1,53 @@
 "use client";
 
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-
 import { RingCtaButton } from "@/components/ring-cta-button";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { CONTACT_EMAIL } from "@/lib/contact-content";
-import {
-  getOtherServices,
-  serviceHref,
-  type ServiceContent,
-} from "@/lib/services-content";
 import { runGsap } from "@/lib/run-gsap";
 import { goToSection } from "@/lib/scroll";
 import {
+  getOtherServices,
+  type ServiceContent,
+  serviceHref,
+} from "@/lib/services-content";
+import {
   siteEyebrowClass,
   siteFocusRingClass,
-  siteHeaderOffsetClass,
+  siteInteriorPageYClass,
   siteMonoChipClass,
   sitePaddingX,
   sitePillLinkClass,
   siteSectionDescriptionClass,
   siteSectionTitleClass,
-  siteSectionYClass,
   siteTitleAccentClass,
 } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
-function OfferingCard({ offering }: { offering: ServiceContent["offerings"][number] }) {
+function OfferingCard({
+  offering,
+}: {
+  offering: ServiceContent["offerings"][number];
+}) {
   return (
     <article className="rounded-2xl border border-border/40 bg-background/20 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] md:p-6">
       <h3 className="text-lg font-bold tracking-tight text-foreground uppercase sm:text-xl">
         {offering.title}
       </h3>
-      <p className="mt-2 text-sm text-muted-foreground text-pretty">{offering.intro}</p>
+      <p className="mt-2 text-sm text-muted-foreground text-pretty">
+        {offering.intro}
+      </p>
       <ul className="mt-4 space-y-2">
         {offering.items.map((item) => (
           <li
             key={item}
             className="flex gap-2 text-sm leading-relaxed text-muted-foreground"
           >
-            <span className="mt-1.5 size-1 shrink-0 rounded-full bg-brand" aria-hidden />
+            <span
+              className="mt-1.5 size-1 shrink-0 rounded-full bg-brand"
+              aria-hidden
+            />
             {item}
           </li>
         ))}
@@ -164,9 +171,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         className={cn(
           "relative z-10 mx-auto flex w-full max-w-7xl flex-col",
           sitePaddingX,
-          siteHeaderOffsetClass,
-          siteSectionYClass,
-          "pt-6 sm:pt-8",
+          siteInteriorPageYClass,
         )}
       >
         <div
@@ -187,18 +192,19 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
           </Link>
 
           <div className="flex max-w-3xl flex-col gap-4 sm:gap-5">
-            <p className={siteEyebrowClass}>
-              {service.index} — Services
-            </p>
+            <p className={siteEyebrowClass}>{service.index} — Services</p>
             <h1
               id={`service-${service.slug}-heading`}
               className={siteSectionTitleClass}
             >
-              <span className={siteTitleAccentClass}>
-                {service.headline}
-              </span>
+              <span className={siteTitleAccentClass}>{service.headline}</span>
             </h1>
-            <p className={cn(siteSectionDescriptionClass, "max-w-[48ch] sm:text-base sm:normal-case sm:tracking-normal")}>
+            <p
+              className={cn(
+                siteSectionDescriptionClass,
+                "max-w-[48ch] sm:text-base sm:normal-case sm:tracking-normal",
+              )}
+            >
               {service.heroSubtitle}
             </p>
             <ul className="flex flex-wrap gap-2">
@@ -339,7 +345,10 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <ul className="flex flex-wrap gap-3">
               {otherServices.map((other) => (
                 <li key={other.slug}>
-                  <Link href={serviceHref(other.slug)} className={sitePillLinkClass}>
+                  <Link
+                    href={serviceHref(other.slug)}
+                    className={sitePillLinkClass}
+                  >
                     {other.title}
                   </Link>
                 </li>

@@ -4,11 +4,10 @@ import { CONTACT_EMAIL } from "@/lib/contact-content";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   siteEyebrowClass,
-  siteHeaderOffsetClass,
+  siteInteriorPageYClass,
   sitePaddingX,
   sitePillLinkClass,
   siteSectionDescriptionClass,
-  siteSectionYClass,
 } from "@/lib/site-layout";
 
 export const metadata = createPageMetadata({
@@ -20,7 +19,7 @@ export const metadata = createPageMetadata({
 export default function TermsPage() {
   return (
     <div
-      className={`mx-auto flex w-full max-w-3xl flex-col gap-6 sm:gap-8 ${sitePaddingX} ${siteHeaderOffsetClass} ${siteSectionYClass}`}
+      className={`mx-auto flex w-full max-w-3xl flex-col gap-6 sm:gap-8 ${sitePaddingX} ${siteInteriorPageYClass}`}
     >
       <div className="flex flex-col gap-4">
         <p className={siteEyebrowClass}>Legal</p>
@@ -44,7 +43,9 @@ export default function TermsPage() {
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold text-foreground">Acceptable use</h2>
+          <h2 className="text-lg font-semibold text-foreground">
+            Acceptable use
+          </h2>
           <p>
             Do not misuse the contact form, attempt to disrupt the site, or
             scrape content for competing marketing without permission.

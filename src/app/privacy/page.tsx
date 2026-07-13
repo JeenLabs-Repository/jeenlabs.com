@@ -4,11 +4,10 @@ import { CONTACT_EMAIL } from "@/lib/contact-content";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   siteEyebrowClass,
-  siteHeaderOffsetClass,
+  siteInteriorPageYClass,
   sitePaddingX,
   sitePillLinkClass,
   siteSectionDescriptionClass,
-  siteSectionYClass,
 } from "@/lib/site-layout";
 
 export const metadata = createPageMetadata({
@@ -21,7 +20,7 @@ export const metadata = createPageMetadata({
 export default function PrivacyPage() {
   return (
     <div
-      className={`mx-auto flex w-full max-w-3xl flex-col gap-6 sm:gap-8 ${sitePaddingX} ${siteHeaderOffsetClass} ${siteSectionYClass}`}
+      className={`mx-auto flex w-full max-w-3xl flex-col gap-6 sm:gap-8 ${sitePaddingX} ${siteInteriorPageYClass}`}
     >
       <div className="flex flex-col gap-4">
         <p className={siteEyebrowClass}>Legal</p>

@@ -29,6 +29,19 @@ export const siteSectionYTallClass =
 
 export const siteHeaderOffsetClass = "pt-[var(--spacing-site-header)]";
 
+/**
+ * Interior pages under the fixed navbar.
+ * Do not combine with `siteSectionYClass` (`py-*`) — it overrides this top padding.
+ */
+export const siteInteriorPageYClass = cn(
+  "pt-[calc(var(--spacing-site-header)+1.5rem)]",
+  "pb-14",
+  "sm:pt-[calc(var(--spacing-site-header)+2rem)] sm:pb-20",
+  "md:pt-[calc(var(--spacing-site-header)+2.5rem)] md:pb-24",
+  "lg:pb-28",
+  "xl:pb-32",
+);
+
 /** Full-bleed page/section canvas — matches layout body and footer. */
 export const siteBackgroundClass = "bg-background";
 

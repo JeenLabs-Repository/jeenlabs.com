@@ -11,7 +11,6 @@ import {
   siteFocusRingClass,
   siteHeaderOffsetClass,
   sitePaddingX,
-  sitePillLinkClass,
 } from "@/lib/site-layout";
 import { cn } from "@/lib/utils";
 
@@ -105,16 +104,6 @@ export function HeroSection() {
                 aria-label="Get started — contact us"
                 onClick={() => goToSection("contact")}
               />
-              <button
-                type="button"
-                className={cn(
-                  sitePillLinkClass,
-                  "border-border/40 bg-transparent px-5",
-                )}
-                onClick={() => goToSection("services")}
-              >
-                View services
-              </button>
             </div>
           </div>
         </div>

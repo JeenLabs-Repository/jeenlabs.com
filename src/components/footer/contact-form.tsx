@@ -1,30 +1,30 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { type FormEvent, useState } from "react";
-
 import { RingCtaButton } from "@/components/ring-cta-button";
 import {
   buildContactMailtoLink,
   CONTACT_EMAIL,
   CONTACT_SUBJECT_OPTIONS,
-  EMPTY_CONTACT_FORM,
   type ContactFormData,
+  EMPTY_CONTACT_FORM,
 } from "@/lib/contact-content";
-import { scrollToSection } from "@/lib/scroll";
 import {
   siteFooterFormFieldClass,
   siteFormFieldClass,
   siteFormLabelClass,
-  sitePillLinkClass,
 } from "@/lib/site-layout";
+import { cn } from "@/lib/utils";
 
 type ContactFormProps = {
   className?: string;
   variant?: "default" | "footer";
 };
 
-export function ContactForm({ className, variant = "default" }: ContactFormProps) {
+export function ContactForm({
+  className,
+  variant = "default",
+}: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>(EMPTY_CONTACT_FORM);
   const [status, setStatus] = useState<"idle" | "opening" | "error">("idle");
   const isFooter = variant === "footer";
@@ -183,18 +183,6 @@ export function ContactForm({ className, variant = "default" }: ContactFormProps
           label="Send message"
           aria-label={`Send message to ${CONTACT_EMAIL}`}
         />
-        {isFooter ? (
-          <button
-            type="button"
-            className={cn(
-              sitePillLinkClass,
-              "min-h-11 border-white/10 bg-background/20 px-5 hover:border-white/25",
-            )}
-            onClick={() => scrollToSection("services")}
-          >
-            View services
-          </button>
-        ) : null}
       </div>
 
       <p className="text-sm text-muted-foreground">
